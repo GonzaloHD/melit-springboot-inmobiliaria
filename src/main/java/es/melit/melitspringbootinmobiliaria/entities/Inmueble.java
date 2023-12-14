@@ -1,6 +1,7 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,11 +10,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @SuppressWarnings("serial")
 @Entity
-public class Inmueble implements Serializable {
-	
+public class Inmueble implements Serializable {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_inmueble")
@@ -26,7 +27,14 @@ public class Inmueble implements Serializable {
 	private boolean activo;
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente", nullable = false)
-	private Cliente cliente;		
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_empleado")
+	private Empleado empleado;
+	
+	@OneToMany(mappedBy = "inmueble")
+	private List<Publicacion> publicaciones;
 	
 	public Integer getIdInmuble() {
 		return idInmuble;
