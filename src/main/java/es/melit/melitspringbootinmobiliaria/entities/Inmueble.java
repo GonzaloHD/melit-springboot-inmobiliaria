@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
@@ -35,6 +36,12 @@ public class Inmueble implements Serializable {
 	
 	@OneToMany(mappedBy = "inmueble")
 	private List<Publicacion> publicaciones;
+	
+	@OneToOne(mappedBy = "inmueble")
+	private Transaccion transaccion;
+
+	
+	
 	
 	public Integer getIdInmuble() {
 		return idInmuble;

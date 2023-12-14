@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
@@ -23,6 +24,9 @@ public class Demanda implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente", nullable = false)
 	private Cliente cliente;
+	
+	@OneToOne(mappedBy = "demanda")
+	private Transaccion transaccion;
 	
 	public Integer getIdDemanda() {
 		return idDemanda;

@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -21,6 +23,15 @@ public class Transaccion implements Serializable {
 	private Integer idTransaccion;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
+	
+	@OneToOne
+	@JoinColumn(name = "fk_inmueble")
+	private Inmueble inmueble;
+	
+	@OneToOne
+	@JoinColumn(name = "fk_demanda")
+	private Demanda demanda;
+	
 	public Integer getIdTransaccion() {
 		return idTransaccion;
 	}
