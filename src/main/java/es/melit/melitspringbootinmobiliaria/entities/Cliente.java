@@ -1,12 +1,14 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @SuppressWarnings("serial")
@@ -24,6 +26,10 @@ public class Cliente implements Serializable {
 	private String direccion;
 	private String email;
 	private String telefono;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Inmueble> inmuebles;
+	
 	public Integer getIdCliente() {
 		return idCliente;
 	}

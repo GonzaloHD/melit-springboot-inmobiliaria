@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity
@@ -22,8 +24,9 @@ public class Inmueble implements Serializable {
 	private String tipoVivienda;
 	private int numHabitaciones;
 	private boolean activo;
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "fk_cliente", nullable = false)
+	private Cliente cliente;		
 	
 	public Integer getIdInmuble() {
 		return idInmuble;
