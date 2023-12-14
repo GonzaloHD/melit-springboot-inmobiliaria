@@ -30,6 +30,9 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente")
 	private List<Inmueble> inmuebles;
 	
+	@OneToMany(mappedBy = "cliente")
+	private List<Demanda> demandas;
+	
 	public Integer getIdCliente() {
 		return idCliente;
 	}
