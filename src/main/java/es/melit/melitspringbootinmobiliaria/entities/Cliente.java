@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 public class Cliente implements Serializable {
 	
 	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer idCliente;
