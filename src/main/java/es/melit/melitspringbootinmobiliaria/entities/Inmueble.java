@@ -22,6 +22,9 @@ public class Inmueble implements Serializable {
 	private String tipoVivienda;
 	private int numHabitaciones;
 	private boolean activo;
+	
+	
+	
 	public Integer getIdInmuble() {
 		return idInmuble;
 	}
