@@ -19,7 +19,7 @@ public class Transaccion implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_empledo")
+	@Column(name = "id_transaccion")
 	private Integer idTransaccion;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
