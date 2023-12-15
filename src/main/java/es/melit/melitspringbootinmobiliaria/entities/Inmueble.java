@@ -3,8 +3,13 @@ package es.melit.melitspringbootinmobiliaria.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,15 +27,17 @@ public class Inmueble implements Serializable {
 	private Integer idInmuble;
 	private String descripcion;
 	private String direccion;
-	private String localidad;
+	private String localidad;	
+	@JsonIgnore
 	private String tipoVivienda;
 	private int numHabitaciones;
 	private boolean activo;
-	@ManyToOne
-	@JoinColumn(name = "fk_cliente", nullable = false)
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_cliente", nullable = false)	
 	private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_empleado")
 	private Empleado empleado;
 	
@@ -38,11 +45,21 @@ public class Inmueble implements Serializable {
 	private List<Publicacion> publicaciones;
 	
 	@OneToOne(mappedBy = "inmueble")
-	private Transaccion transaccion;
-
+	private Transaccion transaccion;	
 	
-	
-	
+	public Inmueble() {
+		super();
+	}
+	public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, int numHabitaciones,
+			boolean activo) {
+		super();
+		this.descripcion = descripcion;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.tipoVivienda = tipoVivienda;
+		this.numHabitaciones = numHabitaciones;
+		this.activo = activo;
+	}
 	public Integer getIdInmuble() {
 		return idInmuble;
 	}
