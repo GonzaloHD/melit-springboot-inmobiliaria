@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,7 +48,7 @@ public class Inmueble implements Serializable {
 	public Inmueble() {
 		super();
 	}
-	public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, int numHabitaciones,
+		public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, int numHabitaciones,
 			boolean activo) {
 		super();
 		this.descripcion = descripcion;
@@ -59,6 +57,7 @@ public class Inmueble implements Serializable {
 		this.tipoVivienda = tipoVivienda;
 		this.numHabitaciones = numHabitaciones;
 		this.activo = activo;
+	
 	}
 	public Integer getIdInmuble() {
 		return idInmuble;
@@ -101,6 +100,26 @@ public class Inmueble implements Serializable {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+	@Override
+	public String toString() {
+		return "Inmueble [idInmuble=" + idInmuble + ", descripcion=" + descripcion + ", direccion=" + direccion
+				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
+				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", publicaciones="
+				+ publicaciones + ", transaccion=" + transaccion + "]";
 	}
 	
 	

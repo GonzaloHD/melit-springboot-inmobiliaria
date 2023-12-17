@@ -70,6 +70,13 @@ public class Empleado implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", inmuebles="
+				+ inmuebles + "]";
+	}
+	
 	
 	
 

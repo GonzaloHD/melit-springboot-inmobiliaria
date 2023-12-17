@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
-import es.melit.melitspringbootinmobiliaria.persistence.InmueblePersistence;
+import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
 
 @Service
-public class GestionInmuebles {
+public class InmuebleService {
 	
 //	Preguntar si inyectar en atributo o constructor y constructor vacío?
-	public InmueblePersistence iDao;	
+	public InmuebleiDao iDao;	
 	
 	@Autowired
-	public GestionInmuebles(InmueblePersistence iDao) {
+	public InmuebleService(InmuebleiDao iDao) {
 		this.iDao = iDao;
 	}
 	

@@ -72,6 +72,12 @@ public class Publicacion implements Serializable {
 	public void setCoste(Double coste) {
 		this.coste = coste;
 	}
+
+	@Override
+	public String toString() {
+		return "Publicacion [idPublicacion=" + idPublicacion + ", inmueble=" + inmueble + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + ", coste=" + coste + "]";
+	}
 	
 	
 	

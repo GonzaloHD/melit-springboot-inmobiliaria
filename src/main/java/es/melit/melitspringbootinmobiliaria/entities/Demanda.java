@@ -40,6 +40,12 @@ public class Demanda implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	@Override
+	public String toString() {
+		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", cliente=" + cliente
+				+ ", transaccion=" + transaccion + "]";
+	}
+	
 	
 	
 	

@@ -44,6 +44,12 @@ public class Transaccion implements Serializable {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+	@Override
+	public String toString() {
+		return "Transaccion [idTransaccion=" + idTransaccion + ", fecha=" + fecha + ", inmueble=" + inmueble
+				+ ", demanda=" + demanda + "]";
+	}
+	
 	
 	
 	
