@@ -3,10 +3,6 @@ package es.melit.melitspringbootinmobiliaria.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,8 +23,7 @@ public class Inmueble implements Serializable {
 	private Integer idInmuble;
 	private String descripcion;
 	private String direccion;
-	private String localidad;	
-	@JsonIgnore
+	private String localidad;		
 	private String tipoVivienda;
 	private int numHabitaciones;
 	private boolean activo;

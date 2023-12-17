@@ -12,19 +12,19 @@ import es.melit.melitspringbootinmobiliaria.persistence.InmueblePersistence;
 
 @Configuration
 public class InmobiliariaConfig {
-	@Bean	
-	CommandLineRunner commandLineRunner(InmueblePersistence iDao) {
-		
-		return args-> {
-			
-			System.out.println("HOLA CommandLineRunner");
-			
+//	@Bean	
+//	CommandLineRunner commandLineRunner(InmueblePersistence iDao) {
+//		
+//		return args-> {
+//			
+//			System.out.println("HOLA CommandLineRunner");
+//			
 //			Inmueble i1 = new Inmueble("Primero", "prueba1", "prueba1","prueba1", 3, true);
 //			Inmueble i2 = new Inmueble("Segundo", "prueba2", "prueba2","prueba2", 2, false);
 //			iDao.saveAll(List.of(i1,i2));
-
-		};
-		
-	}
+//
+//		};
+//		
+//	}
 
 }
