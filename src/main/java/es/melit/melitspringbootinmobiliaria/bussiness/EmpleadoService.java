@@ -48,19 +48,21 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 	}
 	
 	
-//	public Empleado findByNif(String nif) {
-//		Empleado empleado;
-//		
-//		try {
-//			empleado  = dao.findByNif(nif);
-//			
-//			 
-//		}catch(Exception e) {
-//			System.out.println(e.getMessage());			
-//			throw new RuntimeException("Error inesperado en el servidor");
-//		}
-//		return empleado;
-//	}
+	public Empleado findByNif(String nif) {
+		Empleado empleado;
+		
+		try {
+			Optional<Empleado> empleadoOp  = dao.findByNif(nif);
+			if(empleadoOp.isPresent()) ;
+			empleado = empleadoOp.get();
+			
+			 
+		}catch(Exception e) {
+			System.out.println(e.getMessage());			
+			throw new RuntimeException("Error inesperado en el servidor");
+		}
+		return empleado;
+	}
 	
 	
 	@Override

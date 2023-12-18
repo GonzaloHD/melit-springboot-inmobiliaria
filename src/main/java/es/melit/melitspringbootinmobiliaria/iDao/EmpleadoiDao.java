@@ -1,11 +1,17 @@
 package es.melit.melitspringbootinmobiliaria.iDao;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 
 public interface EmpleadoiDao extends JpaRepository<Empleado,Integer>{
 	
-//	Empleado findByNif(String dni);
+	@Query ("SELECT e FROM Empleado e WHERE e.nif = :nif")
+	Optional<Empleado> findByNif(String nif);
+	
+//	List <Empleado> findByNif(String nif);
 
 }

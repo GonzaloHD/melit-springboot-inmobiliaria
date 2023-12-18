@@ -62,8 +62,20 @@ public class InmuebleController {
 	 }	
 
 	@PutMapping(consumes = "application/json")
-	public void changeInmueble(@RequestBody Inmueble inmueble) {		
-		inmuebleService.actualizar(inmueble);
+	public void changeInmueble(@RequestBody InmuebleDto inmuebleDto) {		
+		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());
+		
+		Inmueble inmuebleDao = new Inmueble();
+		
+		inmuebleDao.setActivo(inmuebleDto.isActivo());
+		inmuebleDao.setCliente(cliente);
+		inmuebleDao.setDescripcion(inmuebleDto.getDescripcion());
+		inmuebleDao.setDireccion(inmuebleDto.getDireccion());
+		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
+		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
+		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
+		
+		inmuebleService.actualizar(inmuebleDao);
 	}	
 	
 	@DeleteMapping("/{id}")

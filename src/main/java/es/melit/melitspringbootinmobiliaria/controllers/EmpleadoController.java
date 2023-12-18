@@ -36,10 +36,10 @@ public class EmpleadoController {
 		return gestionEmpleados.buscar(id);
 	}
 	
-//	@GetMapping("/{nif}")
-//	public Empleado getEmpleadoByNif(@PathVariable String nif) {
-//		return gestionEmpleados.findByNif(nif);
-//	}
+	@GetMapping("/nif/{nif}")
+	public Empleado getEmpleadoByNif(@PathVariable String nif) {
+		return gestionEmpleados.findByNif(nif);
+	}
 	
 	@PostMapping(consumes = "application/json")
 	public void registerEmpleados(@RequestBody Empleado empleado) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
+import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 
 @RestController
@@ -35,6 +36,11 @@ public class ClienteController {
 	@GetMapping("/{id}")
 	public Cliente getCliente(@PathVariable Integer id) {
 		return gestionClientes.buscar(id);
+	}
+	
+	@GetMapping("/nif/{nif}")
+	public Cliente getClienteByNif(@PathVariable String nif) {
+		return gestionClientes.findByNif(nif);
 	}
 	
 	@PostMapping(consumes = "application/json")
