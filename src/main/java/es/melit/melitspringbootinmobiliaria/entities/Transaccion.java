@@ -31,7 +31,8 @@ public class Transaccion implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name = "fk_demanda", nullable = false)
-	private Demanda demanda;	
+
+	private Demanda demanda;
 	
 	public Transaccion() {
 		super();
