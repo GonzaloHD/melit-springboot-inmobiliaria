@@ -39,7 +39,10 @@ public class DemandaController {
 	public void registrarDemanda(@RequestBody DemandaDto demandaDto) {			
 		Cliente cliente = clienteService.buscar(demandaDto.getIdCliente());
 		String descripcion = demandaDto.getDescripcion();
-		Demanda demanda = new Demanda(descripcion, cliente);
+		String localidad = demandaDto.getLocalidad();
+		Integer numHabitaciones = demandaDto.getNumHabitaciones();
+		String tipoVivienda = demandaDto.getTipoVivienda();
+		Demanda demanda = new Demanda(descripcion, localidad, numHabitaciones, tipoVivienda, cliente);
 		demandaService.guardar(demanda);
 
 	 }

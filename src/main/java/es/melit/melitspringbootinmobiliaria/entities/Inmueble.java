@@ -3,6 +3,9 @@ package es.melit.melitspringbootinmobiliaria.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,11 +19,12 @@ import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idInmueble")
 public class Inmueble implements Serializable {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_inmueble")
-	private Integer idInmuble;
+	private Integer idInmueble;
 	private String descripcion;
 	private String direccion;
 	private String localidad;		
@@ -46,7 +50,7 @@ public class Inmueble implements Serializable {
 		super();
 	}
 		public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, int numHabitaciones,
-			boolean activo) {
+			boolean activo, Cliente cliente, Empleado empleado) {
 		super();
 		this.descripcion = descripcion;
 		this.direccion = direccion;
@@ -54,13 +58,15 @@ public class Inmueble implements Serializable {
 		this.tipoVivienda = tipoVivienda;
 		this.numHabitaciones = numHabitaciones;
 		this.activo = activo;
+		this.cliente = cliente;
+		this.empleado = empleado;
 	
 	}
-	public Integer getIdInmuble() {
-		return idInmuble;
+	public Integer getIdInmueble() {
+		return idInmueble;
 	}
-	public void setIdInmuble(Integer idInmuble) {
-		this.idInmuble = idInmuble;
+	public void setIdInmuble(Integer idInmueble) {
+		this.idInmueble = idInmueble;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -113,7 +119,7 @@ public class Inmueble implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Inmueble [idInmuble=" + idInmuble + ", descripcion=" + descripcion + ", direccion=" + direccion
+		return "Inmueble [idInmueble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
 				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", publicaciones="
 				+ publicaciones + ", transaccion=" + transaccion + "]";

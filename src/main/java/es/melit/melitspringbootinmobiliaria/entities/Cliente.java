@@ -25,8 +25,22 @@ public class Cliente implements Serializable {
 	private String apellidos;
 	private String direccion;
 	private String email;
-	private String telefono;
+	private String telefono;	
 	
+	
+	public Cliente() {
+		super();
+	}
+	public Cliente(String nif, String nombre, String apellidos, String direccion, String email, String telefono) {
+		super();
+		this.nif = nif;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
+
+	}
 	@OneToMany(mappedBy = "cliente")
 	private List<Inmueble> inmuebles;
 	

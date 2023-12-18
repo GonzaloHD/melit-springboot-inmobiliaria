@@ -2,6 +2,9 @@ package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +16,7 @@ import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idDemanda")
 public class Demanda implements Serializable {	
 
 	@Id
@@ -20,6 +24,9 @@ public class Demanda implements Serializable {
 	@Column(name = "id_demanda")
 	private Integer idDemanda;
 	private String descripcion;
+	private String localidad;
+	private Integer numHabitaciones;
+	private String tipoVivienda;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente", nullable = false)
@@ -31,9 +38,12 @@ public class Demanda implements Serializable {
 	public Demanda() {
 		super();
 	}
-	public Demanda(String descripcion, Cliente cliente) {
+	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente) {
 		super();
 		this.descripcion = descripcion;
+		this.localidad = localidad;
+		this.numHabitaciones = numHabitaciones;
+		this.tipoVivienda = tipoVivienda;
 		this.cliente = cliente;		
 	}
 	
@@ -48,14 +58,43 @@ public class Demanda implements Serializable {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}		
+	
+	public String getLocalidad() {
+		return localidad;
+	}
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+	public Integer getNumHabitaciones() {
+		return numHabitaciones;
+	}
+	public void setNumHabitaciones(Integer numHabitaciones) {
+		this.numHabitaciones = numHabitaciones;
+	}
+	public String getTipoVivienda() {
+		return tipoVivienda;
+	}
+	public void setTipoVivienda(String tipoVivienda) {
+		this.tipoVivienda = tipoVivienda;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Transaccion getTransaccion() {
+		return transaccion;
+	}
+	public void setTransaccion(Transaccion transaccion) {
+		this.transaccion = transaccion;
 	}
 	@Override
 	public String toString() {
 		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", cliente=" + cliente
 				+ ", transaccion=" + transaccion + "]";
-	}
-	
-	
+	}	
 	
 	
 }

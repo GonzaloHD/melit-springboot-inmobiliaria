@@ -4,7 +4,14 @@ public class DemandaDto {
 	
 	private Integer idDemanda;
 	private String descripcion;
-	private Integer idCliente;
+	private Integer idCliente;	
+	private String localidad;
+	private Integer numHabitaciones;
+	private String tipoVivienda;
+	
+	public DemandaDto() {
+		super();
+	}
 	public DemandaDto(Integer idDemanda, String descripcion, Integer idCliente) {
 		super();
 		this.idDemanda = idDemanda;
@@ -28,6 +35,25 @@ public class DemandaDto {
 	}
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
+	}	
+	
+	public String getLocalidad() {
+		return localidad;
+	}
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+	public Integer getNumHabitaciones() {
+		return numHabitaciones;
+	}
+	public void setNumHabitaciones(Integer numHabitaciones) {
+		this.numHabitaciones = numHabitaciones;
+	}
+	public String getTipoVivienda() {
+		return tipoVivienda;
+	}
+	public void setTipoVivienda(String tipoVivienda) {
+		this.tipoVivienda = tipoVivienda;
 	}
 	@Override
 	public String toString() {
