@@ -3,6 +3,7 @@ package es.melit.melitspringbootinmobiliaria.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +38,14 @@ public class InmuebleController {
 		 return inmuebleService.listado();
 	 }	
 	
+	@GetMapping(path = "{idInmueble}")
+	public Inmueble getInmueble(@PathVariable("idInmueble") Integer idInmueble){
+		 return inmuebleService.buscar(idInmueble);
+	 }
+	
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {
-		Cliente cliente = gestionClientes.conseguirCliente(inmuebleDto.getIdCliente());
+		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());
 		
 		Inmueble inmuebleDao = new Inmueble();
 		
@@ -55,15 +61,16 @@ public class InmuebleController {
 		
 	 }
 	
-	@GetMapping(path = "{idInmueble}")
-	public Inmueble getInmueble(@PathVariable("idInmueble") Integer idInmueble){
-		 return inmuebleService.bucar(idInmueble);
-	 }
-
+	
 	@PutMapping(consumes = "application/json")
-	public void changeSeries(@RequestBody Inmueble inmueble) {		
+	public void changeInmueble(@RequestBody Inmueble inmueble) {		
 		inmuebleService.actualizar(inmueble);
 	}	
+	
+	@DeleteMapping("/{id}")
+	public void deleteInmueble(@PathVariable Integer id) {
+		inmuebleService.eliminar(id);
+	}
 	
 
 }

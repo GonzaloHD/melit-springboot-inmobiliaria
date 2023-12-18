@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
-import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
+import es.melit.melitspringbootinmobiliaria.iDao.InmuebleDao;
 
 @Service
 public class InmuebleService implements PlantillaServicio<Inmueble> {
 	
 //	Preguntar si inyectar en atributo o constructor y constructor vacío?
-	public InmuebleiDao iDao;	
+	public InmuebleDao iDao;	
 	
 	@Autowired
-	public InmuebleService(InmuebleiDao iDao) {
+	public InmuebleService(InmuebleDao iDao) {
 		this.iDao = iDao;
 	}
 	
@@ -31,7 +31,7 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		}		
 	}
 	
-	public Inmueble bucar(Integer id) {		
+	public Inmueble buscar(Integer id) {		
 		Optional<Inmueble> optionalInmueble;
 		try {			
 			optionalInmueble = iDao.findById(id);			
@@ -82,5 +82,6 @@ public void actualizar(Inmueble inmuebleActualizado) {
 		
 	
 	}
+
 	
 }

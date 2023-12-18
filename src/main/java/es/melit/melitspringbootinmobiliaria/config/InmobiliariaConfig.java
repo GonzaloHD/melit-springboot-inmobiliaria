@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
-import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
+import es.melit.melitspringbootinmobiliaria.iDao.InmuebleDao;
 
 
 

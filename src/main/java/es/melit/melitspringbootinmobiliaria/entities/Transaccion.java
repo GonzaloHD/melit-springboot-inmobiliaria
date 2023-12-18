@@ -29,7 +29,7 @@ public class Transaccion implements Serializable {
 	private Inmueble inmueble;
 	
 	@OneToOne
-	@JoinColumn(name = "fk_demanda")
+	@JoinColumn(name = "fk_demanda", nullable = false)
 	private Demanda demanda;
 	
 	public Integer getIdTransaccion() {
