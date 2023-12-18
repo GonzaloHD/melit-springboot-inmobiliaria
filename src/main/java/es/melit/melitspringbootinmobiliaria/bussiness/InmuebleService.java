@@ -11,7 +11,7 @@ import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
 
 @Service
-public class InmuebleService {
+public class InmuebleService implements PlantillaServicio<Inmueble> {
 	
 //	Preguntar si inyectar en atributo o constructor y constructor vacío?
 	public InmuebleiDao iDao;	
@@ -21,7 +21,7 @@ public class InmuebleService {
 		this.iDao = iDao;
 	}
 	
-	public List<Inmueble> listadoInmuebles(){		
+	public List<Inmueble> listado(){		
 			
 		try {
 			return iDao.findAll();
@@ -31,7 +31,7 @@ public class InmuebleService {
 		}		
 	}
 	
-	public Inmueble bucarInmueble(Integer id) {		
+	public Inmueble bucar(Integer id) {		
 		Optional<Inmueble> optionalInmueble;
 		try {			
 			optionalInmueble = iDao.findById(id);			
@@ -44,11 +44,11 @@ public class InmuebleService {
 		return optionalInmueble.get();			
 	}
 	
-	public void guardarInmueble(Inmueble inmueble) {
+	public void guardar(Inmueble inmueble) {
 		iDao.save(inmueble);
 	}
 	
-	public void eliminarInmueble(Integer id) {
+	public void eliminar(Integer id) {
 		if(!iDao.existsById(id)) {
 			throw new IllegalStateException("Inmueble con id: " + id + " no existe");
 		}
@@ -56,7 +56,7 @@ public class InmuebleService {
 	}
 
 	
-public void actualizarInmueble(Inmueble inmuebleActualizado) {
+public void actualizar(Inmueble inmuebleActualizado) {
 		
 		Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmuble()).orElseThrow(()->
 		new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmuble() + " no existe"));

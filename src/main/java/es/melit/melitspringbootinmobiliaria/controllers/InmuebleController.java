@@ -30,14 +30,11 @@ public class InmuebleController {
 		this.inmuebleService = inmuebleService;
 		this.gestionClientes = gestionClientes;
 
-	}	
-	
-
-	
+	}		
 	@GetMapping
 	public List<Inmueble> getInmuebles(){
 
-		 return inmuebleService.listadoInmuebles();
+		 return inmuebleService.listado();
 	 }	
 	
 	@PostMapping(consumes = "application/json")
@@ -54,18 +51,18 @@ public class InmuebleController {
 		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
 		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
 				
-		inmuebleService.guardarInmueble(inmuebleDao);
+		inmuebleService.guardar(inmuebleDao);
 		
 	 }
 	
 	@GetMapping(path = "{idInmueble}")
 	public Inmueble getInmueble(@PathVariable("idInmueble") Integer idInmueble){
-		 return inmuebleService.bucarInmueble(idInmueble);
+		 return inmuebleService.bucar(idInmueble);
 	 }
 
 	@PutMapping(consumes = "application/json")
 	public void changeSeries(@RequestBody Inmueble inmueble) {		
-		inmuebleService.actualizarInmueble(inmueble);	
+		inmuebleService.actualizar(inmueble);
 	}	
 	
 
