@@ -10,21 +10,30 @@ import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
 
 
-//@Configuration
-//public class InmobiliariaConfig {
+
+
+@Configuration
+public class InmobiliariaConfig {
 //	@Bean	
 //	CommandLineRunner commandLineRunner(InmuebleiDao iDao) {
-//		
+//
 //		return args-> {
 //			
 //			System.out.println("HOLA CommandLineRunner");
 //			
-////			Inmueble i1 = new Inmueble("Primero", "prueba1", "prueba1","prueba1", 3, true);
-////			Inmueble i2 = new Inmueble("Segundo", "prueba2", "prueba2","prueba2", 2, false);
-////			iDao.saveAll(List.of(i1,i2));
+//
+//		Inmueble i1 = new Inmueble("Primero", "prueba1", "prueba1","prueba1", 3, true);
+//			Inmueble i2 = new Inmueble("Segundo", "prueba2", "prueba2","prueba2", 2, false);
+//			iDao.saveAll(List.of(i1,i2));
+//
 //
 //		};
 //		
 //	}
-//
-//}
+
+
+}
+
+
+
+
