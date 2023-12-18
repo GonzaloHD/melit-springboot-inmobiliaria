@@ -31,7 +31,19 @@ public class Publicacion implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaFin;
 	
-	private Double coste;
+	private Double coste;	
+
+	public Publicacion() {
+		super();
+	}
+
+	public Publicacion(Inmueble inmueble, Date fechaInicio, Date fechaFin, Double coste) {
+		super();
+		this.inmueble = inmueble;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.coste = coste;
+	}
 
 	public Integer getIdPublicacion() {
 		return idPublicacion;

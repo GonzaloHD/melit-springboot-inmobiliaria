@@ -6,7 +6,7 @@ public interface PlantillaServicio<E> {
 	
 	public List<E> listado();
 	
-	public E bucar(Integer id);
+	public E buscar(Integer id);
 	
 	public void guardar(E inmueble);
 	

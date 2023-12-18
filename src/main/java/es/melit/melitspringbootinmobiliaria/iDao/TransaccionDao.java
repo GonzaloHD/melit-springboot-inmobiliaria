@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 
-public interface TransaccioniDao extends JpaRepository<Transaccion, Integer>{
+public interface TransaccionDao extends JpaRepository<Transaccion, Integer>{
 
 }

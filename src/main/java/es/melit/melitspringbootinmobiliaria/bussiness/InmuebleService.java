@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.InmuebleiDao;
+import jakarta.transaction.Transactional;
 
 @Service
 public class InmuebleService implements PlantillaServicio<Inmueble> {
@@ -31,7 +32,7 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		}		
 	}
 	
-	public Inmueble bucar(Integer id) {		
+	public Inmueble buscar(Integer id) {		
 		Optional<Inmueble> optionalInmueble;
 		try {			
 			optionalInmueble = iDao.findById(id);			
@@ -55,8 +56,8 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		iDao.deleteById(id);	
 	}
 
-	
-public void actualizar(Inmueble inmuebleActualizado) {
+	@Transactional
+	public void actualizar(Inmueble inmuebleActualizado) {
 		
 		Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmuble()).orElseThrow(()->
 		new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmuble() + " no existe"));

@@ -10,7 +10,7 @@ import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.iDao.ClienteiDao;
 
 @Service
-public class ClienteService {
+public class ClienteService implements PlantillaServicio<Cliente> {
 
 	public ClienteiDao iDao;
 	
@@ -20,7 +20,7 @@ public class ClienteService {
 		
 	}
 	
-	public List<Cliente> listadoClientes(){		
+	public List<Cliente> listado(){		
 		
 		try {
 			return iDao.findAll();
@@ -29,11 +29,11 @@ public class ClienteService {
 		}		
 	}
 	
-	public void guardarCliente(Cliente cliente) {
+	public void guardar(Cliente cliente) {
 		iDao.save(cliente);
 	}
 	
-	public Cliente conseguirCliente(Integer idCliente) {
+	public Cliente buscar(Integer idCliente) {
 		Cliente cliente;
 		
 		try {
@@ -45,6 +45,18 @@ public class ClienteService {
 			return null;
 		}
 		return cliente;
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizar(Cliente actualizado) {
+		// TODO Auto-generated method stub
+		
 	}
 		
 }

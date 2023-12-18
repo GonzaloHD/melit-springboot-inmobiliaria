@@ -26,16 +26,16 @@ public class ClienteController {
 	
 	@GetMapping
 	public List<Cliente> getClientes(){
-		 return gestionClientes.listadoClientes();
+		 return gestionClientes.listado();
 	 }	
 	
 	@GetMapping("/{id}")
 	public Cliente find(@PathVariable Integer id) {
-		return gestionClientes.conseguirCliente(id);
+		return gestionClientes.buscar(id);
 	}
 	
 	@PostMapping(consumes = "application/json")
 	public void registerClientes(@RequestBody Cliente cliente) {
-		gestionClientes.guardarCliente(cliente);
+		gestionClientes.guardar(cliente);
 	}
 }

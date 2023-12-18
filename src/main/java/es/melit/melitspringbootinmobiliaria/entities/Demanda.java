@@ -13,8 +13,8 @@ import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
-public class Demanda implements Serializable {
-	
+public class Demanda implements Serializable {	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_demanda")
@@ -27,6 +27,15 @@ public class Demanda implements Serializable {
 	
 	@OneToOne(mappedBy = "demanda")
 	private Transaccion transaccion;
+	
+	public Demanda() {
+		super();
+	}
+	public Demanda(String descripcion, Cliente cliente) {
+		super();
+		this.descripcion = descripcion;
+		this.cliente = cliente;		
+	}
 	
 	public Integer getIdDemanda() {
 		return idDemanda;

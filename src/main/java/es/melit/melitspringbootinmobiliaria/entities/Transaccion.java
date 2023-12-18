@@ -23,15 +23,26 @@ public class Transaccion implements Serializable {
 	private Integer idTransaccion;
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
+	private String comentario;
 	
 	@OneToOne
 	@JoinColumn(name = "fk_inmueble", nullable = false)
 	private Inmueble inmueble;
 	
 	@OneToOne
-	@JoinColumn(name = "fk_demanda")
-	private Demanda demanda;
+	@JoinColumn(name = "fk_demanda", nullable = false)
+	private Demanda demanda;	
 	
+	public Transaccion() {
+		super();
+	}
+	public Transaccion(Date fecha, String comentario, Inmueble inmueble, Demanda demanda) {
+		super();
+		this.fecha = fecha;
+		this.comentario = comentario;
+		this.inmueble = inmueble;
+		this.demanda = demanda;
+	}
 	public Integer getIdTransaccion() {
 		return idTransaccion;
 	}
@@ -43,6 +54,25 @@ public class Transaccion implements Serializable {
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}	
+	
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	public Inmueble getInmueble() {
+		return inmueble;
+	}
+	public void setInmueble(Inmueble inmueble) {
+		this.inmueble = inmueble;
+	}
+	public Demanda getDemanda() {
+		return demanda;
+	}
+	public void setDemanda(Demanda demanda) {
+		this.demanda = demanda;
 	}
 	@Override
 	public String toString() {

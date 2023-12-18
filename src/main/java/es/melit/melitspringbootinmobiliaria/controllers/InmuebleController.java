@@ -39,7 +39,7 @@ public class InmuebleController {
 	
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {
-		Cliente cliente = gestionClientes.conseguirCliente(inmuebleDto.getIdCliente());
+		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());
 		
 		Inmueble inmuebleDao = new Inmueble();
 		
@@ -57,11 +57,11 @@ public class InmuebleController {
 	
 	@GetMapping(path = "{idInmueble}")
 	public Inmueble getInmueble(@PathVariable("idInmueble") Integer idInmueble){
-		 return inmuebleService.bucar(idInmueble);
+		 return inmuebleService.buscar(idInmueble);
 	 }
 
 	@PutMapping(consumes = "application/json")
-	public void changeSeries(@RequestBody Inmueble inmueble) {		
+	public void cambiarInmueble(@RequestBody Inmueble inmueble) {		
 		inmuebleService.actualizar(inmueble);
 	}	
 	
