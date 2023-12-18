@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
-import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoiDao;
+import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoDao;
 import jakarta.transaction.Transactional;
 
 @Service
 public class EmpleadoService implements PlantillaServicio<Empleado> {
 
-	public EmpleadoiDao dao;
+	public EmpleadoDao dao;
 	
 	@Autowired
-	public EmpleadoService(EmpleadoiDao dao) {
+	public EmpleadoService(EmpleadoDao dao) {
 		this.dao = dao;
 	}
 	

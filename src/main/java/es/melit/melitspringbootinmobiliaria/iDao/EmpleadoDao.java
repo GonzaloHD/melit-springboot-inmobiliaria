@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 
-public interface EmpleadoiDao extends JpaRepository<Empleado,Integer>{
+public interface EmpleadoDao extends JpaRepository<Empleado,Integer>{
 	
 	@Query ("SELECT e FROM Empleado e WHERE e.nif = :nif")
 	Optional<Empleado> findByNif(String nif);

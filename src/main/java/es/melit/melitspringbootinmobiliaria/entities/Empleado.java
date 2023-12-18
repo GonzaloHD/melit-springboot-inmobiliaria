@@ -26,8 +26,22 @@ public class Empleado implements Serializable {
 	private String telefono;
 	
 	@OneToMany(mappedBy = "empleado")
-	private List<Inmueble> inmuebles;
+	private List<Inmueble> inmuebles;	
 	
+	
+	public Empleado() {
+		super();
+	}
+	public Empleado(String nif, String nombre, String apellidos, String direccion, String email, String telefono) {
+		super();
+		this.nif = nif;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
+
+	}
 	public Integer getIdEmpleado() {
 		return idEmpleado;
 	}
