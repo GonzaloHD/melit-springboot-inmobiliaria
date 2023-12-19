@@ -3,6 +3,9 @@ package es.melit.melitspringbootinmobiliaria.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +27,8 @@ public class Publicacion implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_inmueble", nullable = false)
+	@JsonIdentityReference(alwaysAsId = true)
+	@JsonProperty("idInmueble")
 	private Inmueble inmueble;
 	
 	@Temporal(TemporalType.DATE)
