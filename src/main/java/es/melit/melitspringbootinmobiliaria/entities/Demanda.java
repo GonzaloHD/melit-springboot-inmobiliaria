@@ -3,10 +3,14 @@ package es.melit.melitspringbootinmobiliaria.entities;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,11 +32,13 @@ public class Demanda implements Serializable {
 	private Integer numHabitaciones;
 	private String tipoVivienda;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_cliente", nullable = false)
+	@JsonIdentityReference(alwaysAsId = true)
+	@JsonProperty("idCliente")
 	private Cliente cliente;
-	
-	@OneToOne(mappedBy = "demanda")
+	@OneToOne(mappedBy = "demanda", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Transaccion transaccion;
 	
 	public Demanda() {

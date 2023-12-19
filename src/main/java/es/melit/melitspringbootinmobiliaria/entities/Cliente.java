@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,7 +48,7 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente")
 	private List<Inmueble> inmuebles;
 	
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
 	private List<Demanda> demandas;
 	
 	public Integer getIdCliente() {
