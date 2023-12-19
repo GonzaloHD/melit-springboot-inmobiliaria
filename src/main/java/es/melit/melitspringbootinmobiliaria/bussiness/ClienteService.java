@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
-import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
 import jakarta.transaction.Transactional;
 
@@ -54,7 +53,7 @@ public class ClienteService implements PlantillaServicio<Cliente> {
 		Cliente cliente;
 		
 		try {
-			Optional<Cliente> clienteOp  = iDao.findByNif(nif);
+			Optional<Cliente> clienteOp  = iDao.findFirstByNif(nif);
 			if(clienteOp.isPresent()) ;
 			cliente = clienteOp.get();
 			

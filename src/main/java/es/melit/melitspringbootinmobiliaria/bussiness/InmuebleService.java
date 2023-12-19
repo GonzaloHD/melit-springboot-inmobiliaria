@@ -1,5 +1,6 @@
 package es.melit.melitspringbootinmobiliaria.bussiness;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -44,6 +45,36 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		if(optionalInmueble.isEmpty()) {
 			throw new IllegalStateException("Inmueble buscado no existe");		}
 		return optionalInmueble.get();			
+	}
+	
+	public List<Inmueble> findByLocalidad (String localidad){
+		
+		 try {
+		        return iDao.findByLocalidad(localidad);
+		    } catch (Exception e) {
+		        System.out.println(e.getMessage());
+		        throw new RuntimeException("Error inesperado en el servidor");
+		    }
+	}
+	
+	public List<Inmueble> findByParametros (String localidad, String tipoVivienda, Integer numHabitaciones){
+		
+		 try {
+		        return iDao.findByParametros(localidad, tipoVivienda, numHabitaciones);
+		    } catch (Exception e) {
+		        System.out.println(e.getMessage());
+		        throw new RuntimeException("Error inesperado en el servidor");
+		    }
+	}
+	
+	public List<Inmueble> findDemandaInmueble (String localidad, String tipoVivienda, Integer numHabitaciones){
+		
+		 try {
+		        return iDao.findByParametros(localidad, tipoVivienda, numHabitaciones);
+		    } catch (Exception e) {
+		        System.out.println(e.getMessage());
+		        throw new RuntimeException("Error inesperado en el servidor");
+		    }
 	}
 	
 	public void guardar(Inmueble inmueble) {

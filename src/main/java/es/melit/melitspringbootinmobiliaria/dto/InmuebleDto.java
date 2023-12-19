@@ -7,7 +7,7 @@ public class InmuebleDto {
 	private String direccion;
 	private String localidad;	
 	private String tipoVivienda;
-	private int numHabitaciones;
+	private Integer numHabitaciones;
 	private boolean activo;
 	private Integer idCliente;
 	private Integer idEmpleado;
@@ -18,7 +18,7 @@ public class InmuebleDto {
 	}
 
 	public InmuebleDto(Integer idInmuble, String descripcion, String direccion, String localidad, String tipoVivienda,
-			int numHabitaciones, boolean activo, Integer idCliente, Integer idEmpleado) {
+			Integer numHabitaciones, boolean activo, Integer idCliente, Integer idEmpleado) {
 		super();
 		this.idInmueble = idInmuble;
 		this.descripcion = descripcion;
@@ -71,11 +71,11 @@ public class InmuebleDto {
 		this.tipoVivienda = tipoVivienda;
 	}
 
-	public int getNumHabitaciones() {
+	public Integer getNumHabitaciones() {
 		return numHabitaciones;
 	}
 
-	public void setNumHabitaciones(int numHabitaciones) {
+	public void setNumHabitaciones(Integer numHabitaciones) {
 		this.numHabitaciones = numHabitaciones;
 	}
 

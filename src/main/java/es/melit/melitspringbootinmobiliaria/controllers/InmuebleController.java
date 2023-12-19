@@ -47,6 +47,32 @@ public class InmuebleController {
 		 return inmuebleService.buscar(idInmueble);
 	 }
 	
+	@GetMapping(path = "/localidad/{localidad}")
+	public List<Inmueble> findByLocalidad (@PathVariable String localidad){
+		return inmuebleService.findByLocalidad(localidad);
+	}
+	
+	@GetMapping(path = "/busquedaparametros")
+	public List<Inmueble> findByParametros (@RequestBody InmuebleDto inmuebleDto){
+		
+		String localidad = inmuebleDto.getLocalidad();
+		String tipoVivienda = inmuebleDto.getTipoVivienda();
+		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
+
+        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
+	    }
+	
+	@GetMapping(path = "/inmuebledemanda")
+	public List<Inmueble> findDemandaInmueble (@RequestBody InmuebleDto inmuebleDto){
+		
+		String localidad = inmuebleDto.getLocalidad();
+		String tipoVivienda = inmuebleDto.getTipoVivienda();
+		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
+
+        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
+	    }
+		
+	
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {
 		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());

@@ -52,7 +52,7 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 		Empleado empleado;
 		
 		try {
-			Optional<Empleado> empleadoOp  = dao.findByNif(nif);
+			Optional<Empleado> empleadoOp  = dao.findFirstByNif(nif);
 			if(empleadoOp.isPresent()) ;
 			empleado = empleadoOp.get();
 			

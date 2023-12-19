@@ -31,7 +31,7 @@ public class Inmueble implements Serializable {
 	private String direccion;
 	private String localidad;		
 	private String tipoVivienda;
-	private int numHabitaciones;
+	private Integer numHabitaciones;
 	private boolean activo;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
