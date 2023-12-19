@@ -59,10 +59,8 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 
 	@Transactional
 	public void actualizar(Inmueble inmuebleActualizado) {
-		
 		Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmueble()).orElseThrow(()->
 		new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmueble() + " no existe"));
-		
 		if(inmuebleActualizado.getDescripcion() != null && inmuebleActualizado.getDescripcion().length()>0 && !Objects.equals(inmuebleActualizado.getDescripcion(), inmuebleActual.getDescripcion())) {
 			inmuebleActual.setDescripcion(inmuebleActualizado.getDescripcion());
 		}	
@@ -80,9 +78,14 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		}	
 		if(inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
 			inmuebleActual.setNumHabitaciones(inmuebleActualizado.getNumHabitaciones());
-		}		
+		}	
+		if(inmuebleActualizado.getCliente() != null && !Objects.equals(inmuebleActualizado.getCliente(), inmuebleActual.getCliente())) {
+			inmuebleActual.setCliente(inmuebleActualizado.getCliente());
+		}
+		if(inmuebleActualizado.getEmpleado() != null && !Objects.equals(inmuebleActualizado.getEmpleado(), inmuebleActual.getEmpleado())) {
+			inmuebleActual.setEmpleado(inmuebleActualizado.getEmpleado());
+		}
 		
-	
 	}
 
 	

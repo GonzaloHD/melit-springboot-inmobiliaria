@@ -2,7 +2,7 @@ package es.melit.melitspringbootinmobiliaria.dto;
 
 public class InmuebleDto {
 	
-	private Integer idInmuble;
+	private Integer idInmueble;
 	private String descripcion;
 	private String direccion;
 	private String localidad;	
@@ -20,7 +20,7 @@ public class InmuebleDto {
 	public InmuebleDto(Integer idInmuble, String descripcion, String direccion, String localidad, String tipoVivienda,
 			int numHabitaciones, boolean activo, Integer idCliente, Integer idEmpleado) {
 		super();
-		this.idInmuble = idInmuble;
+		this.idInmueble = idInmuble;
 		this.descripcion = descripcion;
 		this.direccion = direccion;
 		this.localidad = localidad;
@@ -31,12 +31,12 @@ public class InmuebleDto {
 		this.idEmpleado = idEmpleado;
 	}
 
-	public Integer getIdInmuble() {
-		return idInmuble;
+	public Integer getIdInmueble() {
+		return idInmueble;
 	}
 
 	public void setIdInmuble(Integer idInmuble) {
-		this.idInmuble = idInmuble;
+		this.idInmueble = idInmuble;
 	}
 
 	public String getDescripcion() {
@@ -105,7 +105,7 @@ public class InmuebleDto {
 
 	@Override
 	public String toString() {
-		return "InmuebleDto [idInmuble=" + idInmuble + ", descripcion=" + descripcion + ", direccion=" + direccion
+		return "InmuebleDto [idInmuble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
 				+ ", activo=" + activo + ", idCliente=" + idCliente + ", idEmpleado=" + idEmpleado + "]";
 	}

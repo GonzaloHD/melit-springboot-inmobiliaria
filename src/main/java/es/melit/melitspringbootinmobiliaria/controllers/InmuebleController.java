@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
+import es.melit.melitspringbootinmobiliaria.bussiness.EmpleadoService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.dto.InmuebleDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
+import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 
 @RestController
@@ -25,11 +27,13 @@ public class InmuebleController {
 	
 	private InmuebleService inmuebleService;
 	private ClienteService gestionClientes;
+	private EmpleadoService empleadoService;
 	
 	@Autowired
-	public InmuebleController(InmuebleService inmuebleService, ClienteService gestionClientes) {
+	public InmuebleController(InmuebleService inmuebleService, ClienteService gestionClientes, EmpleadoService empleadoService) {
 		this.inmuebleService = inmuebleService;
 		this.gestionClientes = gestionClientes;
+		this.empleadoService = empleadoService;
 
 	}		
 	@GetMapping
@@ -56,6 +60,10 @@ public class InmuebleController {
 		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
 		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
 		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
+		if (inmuebleDto.getIdEmpleado() != null) {
+			Empleado empleado = empleadoService.buscar(inmuebleDto.getIdEmpleado());
+			inmuebleDao.setEmpleado(empleado);
+		}
 				
 		inmuebleService.guardar(inmuebleDao);
 		
@@ -74,6 +82,11 @@ public class InmuebleController {
 		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
 		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
 		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
+		inmuebleDao.setIdInmueble(inmuebleDto.getIdInmueble());
+		if (inmuebleDto.getIdEmpleado() != null) {
+			Empleado empleado = empleadoService.buscar(inmuebleDto.getIdEmpleado());
+			inmuebleDao.setEmpleado(empleado);
+		}
 		
 		inmuebleService.actualizar(inmuebleDao);
 	}	

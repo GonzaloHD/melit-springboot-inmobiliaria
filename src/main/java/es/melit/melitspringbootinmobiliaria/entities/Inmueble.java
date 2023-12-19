@@ -65,7 +65,7 @@ public class Inmueble implements Serializable {
 	public Integer getIdInmueble() {
 		return idInmueble;
 	}
-	public void setIdInmuble(Integer idInmueble) {
+	public void setIdInmueble(Integer idInmueble) {
 		this.idInmueble = idInmueble;
 	}
 	public String getDescripcion() {
