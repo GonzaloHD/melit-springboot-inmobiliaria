@@ -35,6 +35,21 @@ public class DemandaController {
 		 return demandaService.listado();
 	 }	
 	
+	@GetMapping(path = "{idDemanda}")
+	public Demanda getDemanda(@PathVariable("idDemanda") Integer idDemanda){
+		 return demandaService.buscar(idDemanda);
+	 }
+	
+	@GetMapping(consumes = "application/json")
+	public List<Demanda> getDemanda(@RequestBody Demanda demanda){		
+			Integer numHabitaciones = demanda.getNumHabitaciones();
+			String localidad = demanda.getLocalidad();
+			String tipoVivienda = demanda.getTipoVivienda();
+		
+		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);
+		
+	 }
+	
 	@PostMapping(consumes = "application/json")
 	public void registrarDemanda(@RequestBody DemandaDto demandaDto) {			
 		Cliente cliente = clienteService.buscar(demandaDto.getIdCliente());
@@ -45,12 +60,8 @@ public class DemandaController {
 		Demanda demanda = new Demanda(descripcion, localidad, numHabitaciones, tipoVivienda, cliente);
 		demandaService.guardar(demanda);
 
-	 }
-	
-	@GetMapping(path = "{idDemanda}")
-	public Demanda getDemanda(@PathVariable("idDemanda") Integer idDemanda){
-		 return demandaService.buscar(idDemanda);
-	 }
+	 }	
+
 
 	@PutMapping(consumes = "application/json")
 	public void cambiarDemanda(@RequestBody Demanda demanda) {		

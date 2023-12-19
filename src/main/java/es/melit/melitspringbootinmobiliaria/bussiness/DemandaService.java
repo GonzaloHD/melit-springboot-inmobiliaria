@@ -44,6 +44,22 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 			throw new IllegalStateException("Demanda buscada no existe");		}
 		return optionalDemanda.get();	
 	}
+	
+	
+	public List<Demanda> buscarPorCaracteristicas(Integer numHabitaciones, String localidad, String tipoVivienda){
+		
+		if(localidad != null) localidad = localidad.toLowerCase();
+		if(tipoVivienda != null) tipoVivienda = tipoVivienda.toLowerCase();
+		
+		System.out.println("---------------");
+		System.out.println(localidad);
+		System.out.println(tipoVivienda);
+		System.out.println(numHabitaciones);
+		System.out.println("---------------");
+		
+		return dDao.findByCaracteristicas(numHabitaciones, localidad, tipoVivienda);		
+	}
+	
 
 	@Override
 	public void guardar(Demanda demanda) {

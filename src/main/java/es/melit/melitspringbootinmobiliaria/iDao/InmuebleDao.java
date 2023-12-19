@@ -9,6 +9,44 @@ import org.springframework.data.repository.query.Param;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 
 public interface InmuebleDao extends JpaRepository <Inmueble, Integer>{
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//--------------------------------
+	
+	
+	
+	//--------------------------------
 
 	@Query("SELECT i FROM Inmueble i WHERE UPPER(i.localidad) = UPPER(:localidad)")
     List<Inmueble> findByLocalidad(String localidad);
