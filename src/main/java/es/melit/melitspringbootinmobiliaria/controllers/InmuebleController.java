@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
@@ -70,6 +71,12 @@ public class InmuebleController {
 		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
 
         return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
+	    }
+	
+	@GetMapping(path = "/inmueblesdemandados/{idCliente}")
+	public List<Inmueble> findInmueblesDemandadosCliente (@PathVariable Integer idCliente){
+		System.out.println(idCliente);
+        return inmuebleService.findDemandadosInmueble(idCliente);
 	    }
 		
 	

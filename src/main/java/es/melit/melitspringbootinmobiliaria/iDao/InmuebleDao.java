@@ -34,10 +34,14 @@ public interface InmuebleDao extends JpaRepository <Inmueble, Integer>{
 		                                @Param("numHabitaciones") Integer numHabitaciones);
 	
 	
-	//select * from inmueble as inm where (inm.num_habitaciones, inm.localidad, inm.tipo_vivienda) in (select num_habitaciones, localidad, tipo_vivienda from demanda where fk_cliente = 1);
+//	select * from inmueble as inm where (inm.num_habitaciones, inm.localidad, inm.tipo_vivienda) in (select num_habitaciones, localidad, tipo_vivienda from demanda where fk_cliente = 1);
 	
-//	@Query()
-//	List<Inmueble> inmueblesDemandadosCliente();
+//	@Query("select i from Inmueble i where (i.numHabitaciones, i.localidad, i.tipoVivienda) in "
+//			+ "(select d.numHabitaciones, d.localidad, d.tipoVivienda from Demanda d join Cliente c where c.idCliente = ?1)")
+	@Query("SELECT i FROM Inmueble i WHERE EXISTS (SELECT 1 FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1 "
+			+ "AND i.numHabitaciones = d.numHabitaciones AND i.localidad = d.localidad "
+			+ "AND i.tipoVivienda = d.tipoVivienda)")
+	List<Inmueble> findDemandadosCliente(Integer idCliente);
 		
 	
 	

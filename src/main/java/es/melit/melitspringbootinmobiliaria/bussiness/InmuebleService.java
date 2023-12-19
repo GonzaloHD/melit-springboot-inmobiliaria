@@ -77,6 +77,16 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		    }
 	}
 	
+	public List<Inmueble> findDemandadosInmueble (Integer idCliente){
+		
+		 try {
+		        return iDao.findDemandadosCliente(idCliente);
+		    } catch (Exception e) {
+		        System.out.println(e.getMessage());
+		        throw new RuntimeException("Error inesperado en el servidor");
+		    }
+	}
+	
 	public void guardar(Inmueble inmueble) {
 		iDao.save(inmueble);
 	}
