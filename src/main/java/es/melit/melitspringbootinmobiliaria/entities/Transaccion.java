@@ -1,6 +1,7 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -24,6 +25,17 @@ public class Transaccion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_transaccion")
 	private Integer idTransaccion;
+	
+	//Instant
+	
+	private Instant otraFecha;
+	
+	public Instant getOtraFecha() {
+		return otraFecha;
+	}
+	public void setOtraFecha(Instant otraFecha) {
+		this.otraFecha = otraFecha;
+	}
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	private String comentario;

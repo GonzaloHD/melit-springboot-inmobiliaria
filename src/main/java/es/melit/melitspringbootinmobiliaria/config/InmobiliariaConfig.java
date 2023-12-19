@@ -40,13 +40,13 @@ public class InmobiliariaConfig {
 			
 			eDao.saveAll(List.of(e1,e2));
 
-			Inmueble i1 = new Inmueble("PRIMERO", "Calle asdf", "Almeria", "Duplex", 3, false, c1, e1);
-			Inmueble i2 = new Inmueble("PRIMERO", "Calle asdf", "Almeria", "Piso", 3, false, c2, e2);			
+			Inmueble i1 = new Inmueble("PRIMERO", "Calle asdf", "Madrid", "Piso", 3, false, c1, e1);
+			Inmueble i2 = new Inmueble("OTRA", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2);			
 			
 			iDao.saveAll(List.of(i1,i2));
 			
-			Demanda d1 = new Demanda("Quiero una casa muy grande", "Madrid", 3, "Piso", c1);
-			Demanda d2 = new Demanda("Quiero una casa muy pequeña", "Barcelona", 2, "Piso", c2);
+			Demanda d1 = new Demanda("Quiero una casa muy grande", "Almeria", 1, "Dupex", c1);
+			Demanda d2 = new Demanda("Quiero una casa muy pequeña", "Armenia", 4, "Castillo", c2);
 			
 			dDao.saveAll(List.of(d1,d2));
 			
