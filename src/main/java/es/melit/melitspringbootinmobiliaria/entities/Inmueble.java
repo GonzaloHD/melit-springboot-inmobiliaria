@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
@@ -33,11 +35,15 @@ public class Inmueble implements Serializable {
 	private boolean activo;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_cliente", nullable = false)	
+	@JoinColumn(name = "fk_cliente", nullable = false)
+	@JsonIdentityReference(alwaysAsId = true)
+	@JsonProperty("idCliente")
 	private Cliente cliente;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_empleado")
+	@JsonIdentityReference(alwaysAsId = true)
+	@JsonProperty("idEmpleado")
 	private Empleado empleado;
 	
 	@OneToMany(mappedBy = "inmueble")
