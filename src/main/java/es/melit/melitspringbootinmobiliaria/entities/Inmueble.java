@@ -55,7 +55,7 @@ public class Inmueble implements Serializable {
 	public Inmueble() {
 		super();
 	}
-		public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, int numHabitaciones,
+		public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, Integer numHabitaciones,
 			boolean activo, Cliente cliente, Empleado empleado) {
 		super();
 		this.descripcion = descripcion;
@@ -98,10 +98,11 @@ public class Inmueble implements Serializable {
 	public void setTipoVivienda(String tipoVivienda) {
 		this.tipoVivienda = tipoVivienda;
 	}
-	public int getNumHabitaciones() {
+	public Integer getNumHabitaciones() {
+//		return numHabitaciones != null ? numHabitaciones.intValue() : 0;
 		return numHabitaciones;
 	}
-	public void setNumHabitaciones(int numHabitaciones) {
+	public void setNumHabitaciones(Integer numHabitaciones) {
 		this.numHabitaciones = numHabitaciones;
 	}
 	public boolean isActivo() {

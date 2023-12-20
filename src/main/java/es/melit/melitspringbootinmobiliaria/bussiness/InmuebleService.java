@@ -114,11 +114,11 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		if(inmuebleActualizado.getTipoVivienda() != null && inmuebleActualizado.getTipoVivienda().length()>0 && !Objects.equals(inmuebleActualizado.getTipoVivienda(), inmuebleActual.getTipoVivienda())) {
 			inmuebleActual.setTipoVivienda(inmuebleActualizado.getTipoVivienda());
 		}
-		if(inmuebleActualizado.getNumHabitaciones() > 0 && inmuebleActualizado.getNumHabitaciones()!= inmuebleActual.getNumHabitaciones()) {
+		if(inmuebleActualizado.getNumHabitaciones() != null && inmuebleActualizado.getNumHabitaciones()!= inmuebleActual.getNumHabitaciones()) {
 			inmuebleActual.setNumHabitaciones(inmuebleActualizado.getNumHabitaciones());
 		}	
 		if(inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
-			inmuebleActual.setNumHabitaciones(inmuebleActualizado.getNumHabitaciones());
+			inmuebleActual.setActivo(inmuebleActualizado.isActivo());;
 		}	
 		if(inmuebleActualizado.getCliente() != null && !Objects.equals(inmuebleActualizado.getCliente(), inmuebleActual.getCliente())) {
 			inmuebleActual.setCliente(inmuebleActualizado.getCliente());
