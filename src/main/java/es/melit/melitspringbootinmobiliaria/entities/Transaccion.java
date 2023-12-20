@@ -23,18 +23,7 @@ public class Transaccion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_transaccion")
 	private Integer idTransaccion;
-	
-	//Instant
-	
-//	private Instant otraFecha;
-//	
-//	public Instant getOtraFecha() {
-//		return otraFecha;
-//	}
-//	public void setOtraFecha(Instant otraFecha) {
-//		this.otraFecha = otraFecha;
-//	}
-	private Instant fecha;
+	private Instant fecha;	
 	private String comentario;
 	
 	@JsonIdentityReference(alwaysAsId = true)
@@ -49,15 +38,24 @@ public class Transaccion implements Serializable {
 	@JoinColumn(name = "fk_demanda", nullable = false)
 	private Demanda demanda;
 	
+	@JsonIdentityReference(alwaysAsId = true)
+	@JsonProperty("idEmpleado")	
+	@ManyToOne
+	@JoinColumn(name = "fk_empleado")
+	private Empleado empleado;
+	
 	public Transaccion() {
 		super();
 	}
-	public Transaccion( String comentario, Inmueble inmueble, Demanda demanda) {
+
+	public Transaccion(String comentario, Inmueble inmueble, Demanda demanda, Empleado empleado) {
+
 		super();
 		this.fecha = Instant.now();
 		this.comentario = comentario;
 		this.inmueble = inmueble;
 		this.demanda = demanda;
+		this.empleado = empleado;
 	}
 	public Integer getIdTransaccion() {
 		return idTransaccion;
@@ -90,15 +88,17 @@ public class Transaccion implements Serializable {
 	public void setDemanda(Demanda demanda) {
 		this.demanda = demanda;
 	}
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
 	@Override
 	public String toString() {
-		return "Transaccion [idTransaccion=" + idTransaccion + ", fecha=" + fecha + ", inmueble=" + inmueble
-				+ ", demanda=" + demanda + "]";
-	}
-	
-	
-	
-	
-	
+		return "Transaccion [idTransaccion=" + idTransaccion + ", fecha=" + fecha
+				+ ", comentario=" + comentario + ", inmueble=" + inmueble + ", demanda=" + demanda + ", empleado="
+				+ empleado + "]";
+	}		
 	
 }

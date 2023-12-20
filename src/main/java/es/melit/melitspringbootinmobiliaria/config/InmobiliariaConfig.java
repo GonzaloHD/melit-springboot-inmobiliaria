@@ -55,8 +55,8 @@ public class InmobiliariaConfig {
 //			String fechaString1 = "24/11/2022";
 //			String fechaString2 = "25/10/2023";
 			
-			Transaccion t1 = new Transaccion( "Genial", i1, d1);
-			Transaccion t2 = new Transaccion( "No problema", i2, d2);
+			Transaccion t1 = new Transaccion( "Genial", i1, d1, e1);
+			Transaccion t2 = new Transaccion( "No problema", i2, d2, e2);
 			
 			tDao.saveAll(List.of(t1,t2));
 			

@@ -16,8 +16,7 @@ import jakarta.persistence.OneToMany;
 @SuppressWarnings("serial")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idEmpleado")
 @Entity
-public class Empleado implements Serializable {
-	
+public class Empleado implements Serializable {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_empleado")
@@ -30,8 +29,10 @@ public class Empleado implements Serializable {
 	private String telefono;
 	
 	@OneToMany(mappedBy = "empleado")
-	private List<Inmueble> inmuebles;	
+	private List<Inmueble> inmuebles;
 	
+	@OneToMany(mappedBy = "empleado")
+	private List<Transaccion> transacciones;	
 	
 	public Empleado() {
 		super();
@@ -44,7 +45,6 @@ public class Empleado implements Serializable {
 		this.direccion = direccion;
 		this.email = email;
 		this.telefono = telefono;
-
 	}
 	public Integer getIdEmpleado() {
 		return idEmpleado;
@@ -87,6 +87,18 @@ public class Empleado implements Serializable {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}	
+	public List<Inmueble> getInmuebles() {
+		return inmuebles;
+	}
+	public void setInmuebles(List<Inmueble> inmuebles) {
+		this.inmuebles = inmuebles;
+	}
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
 	}
 	@Override
 	public String toString() {
