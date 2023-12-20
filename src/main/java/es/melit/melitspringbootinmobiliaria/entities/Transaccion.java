@@ -2,7 +2,6 @@ package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity
@@ -29,16 +26,15 @@ public class Transaccion implements Serializable {
 	
 	//Instant
 	
-	private Instant otraFecha;
-	
-	public Instant getOtraFecha() {
-		return otraFecha;
-	}
-	public void setOtraFecha(Instant otraFecha) {
-		this.otraFecha = otraFecha;
-	}
-	@Temporal(TemporalType.DATE)
-	private Date fecha;
+//	private Instant otraFecha;
+//	
+//	public Instant getOtraFecha() {
+//		return otraFecha;
+//	}
+//	public void setOtraFecha(Instant otraFecha) {
+//		this.otraFecha = otraFecha;
+//	}
+	private Instant fecha;
 	private String comentario;
 	
 	@JsonIdentityReference(alwaysAsId = true)
@@ -56,9 +52,9 @@ public class Transaccion implements Serializable {
 	public Transaccion() {
 		super();
 	}
-	public Transaccion(Date fecha, String comentario, Inmueble inmueble, Demanda demanda) {
+	public Transaccion( String comentario, Inmueble inmueble, Demanda demanda) {
 		super();
-		this.fecha = fecha;
+		this.fecha = Instant.now();
 		this.comentario = comentario;
 		this.inmueble = inmueble;
 		this.demanda = demanda;
@@ -69,10 +65,10 @@ public class Transaccion implements Serializable {
 	public void setIdTransaccion(Integer idTransaccion) {
 		this.idTransaccion = idTransaccion;
 	}
-	public Date getFecha() {
+	public Instant getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(Instant fecha) {
 		this.fecha = fecha;
 	}	
 	

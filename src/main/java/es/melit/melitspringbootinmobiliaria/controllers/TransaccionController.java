@@ -44,9 +44,8 @@ public class TransaccionController {
 	public void registrarTransaccion(@RequestBody TransaccionDto transaccionDto) {			
 		Demanda demanda = demandaService.buscar(transaccionDto.getIdDemanda());
 		Inmueble inmueble = inmuebleService.buscar(transaccionDto.getIdInmueble());
-		Date fecha = transaccionDto.getFecha();
 		String comentario = transaccionDto.getComentario();
-		Transaccion transaccion = new Transaccion(fecha, comentario, inmueble, demanda);
+		Transaccion transaccion = new Transaccion(comentario, inmueble, demanda);
 		transaccionService.guardar(transaccion);
 	 }
 	

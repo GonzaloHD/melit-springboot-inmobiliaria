@@ -52,13 +52,13 @@ public class InmobiliariaConfig {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
-			String fechaString1 = "24/11/2022";
-			String fechaString2 = "25/10/2023";
+//			String fechaString1 = "24/11/2022";
+//			String fechaString2 = "25/10/2023";
 			
-//			Transaccion t1 = new Transaccion(sdf.parse(fechaString1), "Genial", i1, d1);
-//			Transaccion t2 = new Transaccion(sdf.parse(fechaString2), "No problema", i2, d2);
-//			
-//			tDao.saveAll(List.of(t1,t2));
+			Transaccion t1 = new Transaccion( "Genial", i1, d1);
+			Transaccion t2 = new Transaccion( "No problema", i2, d2);
+			
+			tDao.saveAll(List.of(t1,t2));
 			
 			String fechaString3 = "24/01/2022";
 			String fechaString4 = "25/10/2022";

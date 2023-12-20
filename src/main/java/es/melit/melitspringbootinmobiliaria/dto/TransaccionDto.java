@@ -1,11 +1,8 @@
 package es.melit.melitspringbootinmobiliaria.dto;
 
-import java.util.Date;
-
 public class TransaccionDto {
 	
 	private Integer idTransaccion;
-	private Date fecha;
 	private String comentario;
 	private Integer idDemanda;
 	private Integer idInmueble;	
@@ -14,10 +11,9 @@ public class TransaccionDto {
 		super();
 	}
 
-	public TransaccionDto(Integer idTransaccion, Date fecha, String comentario, Integer idDemanda, Integer idInmueble) {
+	public TransaccionDto(Integer idTransaccion, String comentario, Integer idDemanda, Integer idInmueble) {
 		super();
 		this.idTransaccion = idTransaccion;
-		this.fecha = fecha;
 		this.comentario = comentario;
 		this.idDemanda = idDemanda;
 		this.idInmueble = idInmueble;
@@ -29,12 +25,7 @@ public class TransaccionDto {
 	public void setIdTransaccion(Integer idTransaccion) {
 		this.idTransaccion = idTransaccion;
 	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+
 	public Integer getIdDemanda() {
 		return idDemanda;
 	}
@@ -58,7 +49,7 @@ public class TransaccionDto {
 
 	@Override
 	public String toString() {
-		return "TransaccionDto [idTransaccion=" + idTransaccion + ", fecha=" + fecha + ", comentario=" + comentario
+		return "TransaccionDto [idTransaccion=" + idTransaccion +  ", comentario=" + comentario
 				+ ", idDemanda=" + idDemanda + ", idInmueble=" + idInmueble + "]";
 	}
 	
