@@ -57,7 +57,7 @@ public class InmobiliariaConfig {
 			
 //			Transaccion t1 = new Transaccion(sdf.parse(fechaString1), "Genial", i1, d1);
 //			Transaccion t2 = new Transaccion(sdf.parse(fechaString2), "No problema", i2, d2);
-			
+//			
 //			tDao.saveAll(List.of(t1,t2));
 			
 			String fechaString3 = "24/01/2022";

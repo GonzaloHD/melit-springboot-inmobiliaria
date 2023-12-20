@@ -1,6 +1,7 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -16,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
@@ -37,13 +39,14 @@ public class Demanda implements Serializable {
 	@JsonIdentityReference(alwaysAsId = true)
 	@JsonProperty("idCliente")
 	private Cliente cliente;
-	@OneToOne(mappedBy = "demanda", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "demanda", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Transaccion transaccion;
+	private List<Transaccion> transacciones;
 	
 	public Demanda() {
 		super();
 	}
+	
 	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente) {
 		super();
 		this.descripcion = descripcion;
@@ -90,17 +93,20 @@ public class Demanda implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Transaccion getTransaccion() {
-		return transaccion;
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
 	}
-	public void setTransaccion(Transaccion transaccion) {
-		this.transaccion = transaccion;
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
 	}
 	@Override
 	public String toString() {
-		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", cliente=" + cliente
-				+ ", transaccion=" + transaccion + "]";
-	}	
+		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", localidad=" + localidad
+				+ ", numHabitaciones=" + numHabitaciones + ", tipoVivienda=" + tipoVivienda + ", cliente=" + cliente
+				+ ", transacciones=" + transacciones + "]";
+	}
+
+	
 	
 	
 }

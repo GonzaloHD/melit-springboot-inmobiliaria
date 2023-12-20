@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -48,9 +49,8 @@ public class Transaccion implements Serializable {
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	@JsonProperty("idDemanda")	
-	@OneToOne
-	@JoinColumn(name = "fk_demanda", nullable = false, unique = false)
-
+	@ManyToOne
+	@JoinColumn(name = "fk_demanda", nullable = false)
 	private Demanda demanda;
 	
 	public Transaccion() {
