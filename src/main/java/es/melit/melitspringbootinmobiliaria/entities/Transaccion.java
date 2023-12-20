@@ -29,7 +29,7 @@ public class Transaccion implements Serializable {
 	@JsonIdentityReference(alwaysAsId = true)
 	@JsonProperty("idInmueble")	
 	@OneToOne
-	@JoinColumn(name = "fk_inmueble")
+	@JoinColumn(name = "fk_inmueble",  nullable = false)
 	private Inmueble inmueble;
 	
 	@JsonIdentityReference(alwaysAsId = true)
@@ -41,7 +41,7 @@ public class Transaccion implements Serializable {
 	@JsonIdentityReference(alwaysAsId = true)
 	@JsonProperty("idEmpleado")	
 	@ManyToOne
-	@JoinColumn(name = "fk_empleado")
+	@JoinColumn(name = "fk_empleado",  nullable = false)
 	private Empleado empleado;
 	
 	public Transaccion() {

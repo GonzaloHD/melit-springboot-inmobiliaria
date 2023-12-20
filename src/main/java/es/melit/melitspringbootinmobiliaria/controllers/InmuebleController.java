@@ -72,6 +72,18 @@ public class InmuebleController {
         return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
 	    }
 	
+//	@GetMapping(path = "/inmuebledemanda/{idInmueble}")
+//	public List<Inmueble> findDemandaInmuebleById (@PathVariable("idInmueble") Integer idInmueble){
+//		
+//		String localidad = inmuebleDto.getLocalidad();
+//		String tipoVivienda = inmuebleDto.getTipoVivienda();
+//		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
+//
+//        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
+//	    }
+	
+	
+	
 	@GetMapping(path = "/inmueblesdemandados/{idCliente}")
 	public List<Inmueble> findInmueblesDemandadosCliente (@PathVariable Integer idCliente){
 		System.out.println(idCliente);
@@ -100,29 +112,10 @@ public class InmuebleController {
 		inmuebleService.guardar(inmuebleDao);
 		
 	 }	
-
+		
 	@PutMapping(consumes = "application/json")
-	public void changeInmueble(@RequestBody InmuebleDto inmuebleDto) {
-		
-//		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());		
-		Inmueble inmuebleDao = new Inmueble();
-		
-		inmuebleDao.setActivo(inmuebleDto.isActivo());
-//		inmuebleDao.setCliente(cliente);
-		inmuebleDao.setDescripcion(inmuebleDto.getDescripcion());
-		inmuebleDao.setDireccion(inmuebleDto.getDireccion());
-		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
-		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
-		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
-		inmuebleDao.setIdInmueble(inmuebleDto.getIdInmueble());
-		if (inmuebleDto.getIdEmpleado() != null) {
-			Empleado empleado = empleadoService.buscar(inmuebleDto.getIdEmpleado());
-			inmuebleDao.setEmpleado(empleado);
-		}
-		
-		System.out.println(inmuebleDao);
-		
-		inmuebleService.actualizar(inmuebleDao);
+	public void changeInmueble(@RequestBody Inmueble inmueble) {		
+		inmuebleService.actualizar(inmueble);
 	}	
 	
 	@DeleteMapping("/{id}")
