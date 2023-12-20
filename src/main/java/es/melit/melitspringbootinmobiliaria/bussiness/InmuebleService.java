@@ -102,6 +102,7 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 	public void actualizar(Inmueble inmuebleActualizado) {
 		Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmueble()).orElseThrow(()->
 		new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmueble() + " no existe"));
+		
 		if(inmuebleActualizado.getDescripcion() != null && inmuebleActualizado.getDescripcion().length()>0 && !Objects.equals(inmuebleActualizado.getDescripcion(), inmuebleActual.getDescripcion())) {
 			inmuebleActual.setDescripcion(inmuebleActualizado.getDescripcion());
 		}	

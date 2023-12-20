@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
@@ -103,13 +102,13 @@ public class InmuebleController {
 	 }	
 
 	@PutMapping(consumes = "application/json")
-	public void changeInmueble(@RequestBody InmuebleDto inmuebleDto) {		
-		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());
+	public void changeInmueble(@RequestBody InmuebleDto inmuebleDto) {
 		
+//		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());		
 		Inmueble inmuebleDao = new Inmueble();
 		
 		inmuebleDao.setActivo(inmuebleDto.isActivo());
-		inmuebleDao.setCliente(cliente);
+//		inmuebleDao.setCliente(cliente);
 		inmuebleDao.setDescripcion(inmuebleDto.getDescripcion());
 		inmuebleDao.setDireccion(inmuebleDto.getDireccion());
 		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
@@ -120,6 +119,8 @@ public class InmuebleController {
 			Empleado empleado = empleadoService.buscar(inmuebleDto.getIdEmpleado());
 			inmuebleDao.setEmpleado(empleado);
 		}
+		
+		System.out.println(inmuebleDao);
 		
 		inmuebleService.actualizar(inmuebleDao);
 	}	

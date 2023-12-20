@@ -60,7 +60,7 @@ public class DemandaController {
 		Demanda demanda = new Demanda(descripcion, localidad, numHabitaciones, tipoVivienda, cliente);
 		demandaService.guardar(demanda);
 
-	 }	
+	 }
 
 
 	@PutMapping(consumes = "application/json")
