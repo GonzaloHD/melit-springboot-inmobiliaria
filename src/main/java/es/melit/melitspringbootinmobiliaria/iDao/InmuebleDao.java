@@ -36,11 +36,14 @@ public interface InmuebleDao extends JpaRepository <Inmueble, Integer>{
 	
 //	select * from inmueble as inm where (inm.num_habitaciones, inm.localidad, inm.tipo_vivienda) in (select num_habitaciones, localidad, tipo_vivienda from demanda where fk_cliente = 1);
 	
-//	@Query("select i from Inmueble i where (i.numHabitaciones, i.localidad, i.tipoVivienda) in "
-//			+ "(select d.numHabitaciones, d.localidad, d.tipoVivienda from Demanda d join Cliente c where c.idCliente = ?1)")
-	@Query("SELECT i FROM Inmueble i WHERE EXISTS (SELECT 1 FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1 "
-			+ "AND i.numHabitaciones = d.numHabitaciones AND i.localidad = d.localidad "
-			+ "AND i.tipoVivienda = d.tipoVivienda)")
+//	SELECT * FROM Inmueble i WHERE EXISTS (SELECT 1 FROM demanda d WHERE d.fk_cliente = 1 AND i.num_habitaciones = d.num_habitaciones AND i.localidad = d.localidad AND i.tipo_vivienda = d.tipo_vivienda);
+	
+//	@Query("SELECT i FROM Inmueble i WHERE EXISTS (SELECT 1 FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1 "
+//	+ "AND i.numHabitaciones = d.numHabitaciones AND i.localidad = d.localidad "
+//	+ "AND i.tipoVivienda = d.tipoVivienda)")
+	
+	@Query("SELECT i FROM Inmueble i WHERE (i.numHabitaciones, i.localidad, i.tipoVivienda) "
+			+ "IN (SELECT d.numHabitaciones, d.localidad, d.tipoVivienda FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1)")
 	List<Inmueble> findDemandadosCliente(Integer idCliente);
 		
 	

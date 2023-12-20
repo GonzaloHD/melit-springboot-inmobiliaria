@@ -41,17 +41,15 @@ public class Transaccion implements Serializable {
 	private String comentario;
 	
 	@JsonIdentityReference(alwaysAsId = true)
-	@JsonProperty("idInmueble")
-	
+	@JsonProperty("idInmueble")	
 	@OneToOne
-	@JoinColumn(name = "fk_inmueble", nullable = false)
+	@JoinColumn(name = "fk_inmueble")
 	private Inmueble inmueble;
 	
 	@JsonIdentityReference(alwaysAsId = true)
-	@JsonProperty("idDemanda")
-	
+	@JsonProperty("idDemanda")	
 	@OneToOne
-	@JoinColumn(name = "fk_demanda", nullable = false)
+	@JoinColumn(name = "fk_demanda", nullable = false, unique = false)
 
 	private Demanda demanda;
 	

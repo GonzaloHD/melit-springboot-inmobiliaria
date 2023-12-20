@@ -43,7 +43,7 @@ public class InmobiliariaConfig {
 			Inmueble i1 = new Inmueble("PRIMERO", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1);
 			Inmueble i2 = new Inmueble("OTRA", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2);			
 			
-			iDao.saveAll(List.of(i1,i2));
+			iDao.saveAll(List.of(i1,i2));			
 			
 			Demanda d1 = new Demanda("Quiero una casa muy grande", "Almeria", 1, "Piso", c1);
 			Demanda d2 = new Demanda("Quiero una casa muy pequeña", "Armenia", 4, "Castillo", c2);
@@ -55,10 +55,10 @@ public class InmobiliariaConfig {
 			String fechaString1 = "24/11/2022";
 			String fechaString2 = "25/10/2023";
 			
-			Transaccion t1 = new Transaccion(sdf.parse(fechaString1), "Genial", i1, d1);
-			Transaccion t2 = new Transaccion(sdf.parse(fechaString2), "No problema", i2, d2);
+//			Transaccion t1 = new Transaccion(sdf.parse(fechaString1), "Genial", i1, d1);
+//			Transaccion t2 = new Transaccion(sdf.parse(fechaString2), "No problema", i2, d2);
 			
-			tDao.saveAll(List.of(t1,t2));
+//			tDao.saveAll(List.of(t1,t2));
 			
 			String fechaString3 = "24/01/2022";
 			String fechaString4 = "25/10/2022";

@@ -47,6 +47,7 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 		try {
 			tDao.save(inmueble);
 		}catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new RuntimeException("Error inesperado en el servidor");
 		}
 				
