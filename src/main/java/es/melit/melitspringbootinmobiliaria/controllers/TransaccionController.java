@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.DemandaService;
+import es.melit.melitspringbootinmobiliaria.bussiness.EmpleadoService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.bussiness.TransaccionService;
 import es.melit.melitspringbootinmobiliaria.dto.TransaccionDto;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
+import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 
@@ -27,12 +29,13 @@ public class TransaccionController {
 	private TransaccionService transaccionService;
 	private InmuebleService inmuebleService;
 	private DemandaService demandaService;
-	
+	private EmpleadoService empleadoService;
 	@Autowired
-	public TransaccionController(TransaccionService transaccionService, InmuebleService inmuebleService, DemandaService demandaService) {
+	public TransaccionController(TransaccionService transaccionService, InmuebleService inmuebleService, DemandaService demandaService, EmpleadoService empleadoService) {
 		this.transaccionService = transaccionService;
 		this.inmuebleService = inmuebleService;
 		this.demandaService = demandaService;
+		this.empleadoService = empleadoService;
 
 	}		
 	@GetMapping
@@ -44,9 +47,10 @@ public class TransaccionController {
 	public void registrarTransaccion(@RequestBody TransaccionDto transaccionDto) {			
 		Demanda demanda = demandaService.buscar(transaccionDto.getIdDemanda());
 		Inmueble inmueble = inmuebleService.buscar(transaccionDto.getIdInmueble());
-		Date fecha = transaccionDto.getFecha();
+		
 		String comentario = transaccionDto.getComentario();
-		Transaccion transaccion = new Transaccion(fecha, comentario, inmueble, demanda);
+		Empleado empleado = empleadoService.buscar(transaccionDto.getIdEmpleado());
+		Transaccion transaccion = new Transaccion(comentario, inmueble, demanda, empleado);
 		transaccionService.guardar(transaccion);
 	 }
 	

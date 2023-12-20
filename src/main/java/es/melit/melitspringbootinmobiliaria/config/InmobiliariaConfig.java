@@ -12,7 +12,6 @@ import es.melit.melitspringbootinmobiliaria.entities.Demanda;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.entities.Publicacion;
-import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
 import es.melit.melitspringbootinmobiliaria.iDao.DemandaDao;
 import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoDao;

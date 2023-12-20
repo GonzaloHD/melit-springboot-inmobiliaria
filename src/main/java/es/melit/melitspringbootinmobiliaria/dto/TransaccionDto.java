@@ -8,19 +8,21 @@ public class TransaccionDto {
 	private Date fecha;
 	private String comentario;
 	private Integer idDemanda;
-	private Integer idInmueble;	
+	private Integer idInmueble;
+	private Integer idEmpleado;
 	
 	public TransaccionDto() {
 		super();
 	}
 
-	public TransaccionDto(Integer idTransaccion, Date fecha, String comentario, Integer idDemanda, Integer idInmueble) {
+	public TransaccionDto(Integer idTransaccion, Date fecha, String comentario, Integer idDemanda, Integer idInmueble, Integer idEmpleado) {
 		super();
 		this.idTransaccion = idTransaccion;
 		this.fecha = fecha;
 		this.comentario = comentario;
 		this.idDemanda = idDemanda;
 		this.idInmueble = idInmueble;
+		this.idEmpleado = idEmpleado;
 	}
 
 	public Integer getIdTransaccion() {
@@ -56,11 +58,18 @@ public class TransaccionDto {
 		this.comentario = comentario;
 	}
 
+	public Integer getIdEmpleado() {
+		return idEmpleado;
+	}
+
+	public void setIdEmpleado(Integer idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+
 	@Override
 	public String toString() {
 		return "TransaccionDto [idTransaccion=" + idTransaccion + ", fecha=" + fecha + ", comentario=" + comentario
-				+ ", idDemanda=" + idDemanda + ", idInmueble=" + idInmueble + "]";
-	}
-	
+				+ ", idDemanda=" + idDemanda + ", idInmueble=" + idInmueble + ", idEmpleado=" + idEmpleado + "]";
+	}	
 	
 }
