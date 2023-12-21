@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
 import es.melit.melitspringbootinmobiliaria.bussiness.DemandaService;
+import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.dto.DemandaDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
+import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 
 @RestController
 @RequestMapping(path = "/demandas")
@@ -23,11 +25,13 @@ public class DemandaController {
 	
 	private DemandaService demandaService;
 	private ClienteService clienteService;
+	private InmuebleService inmuebleService;
 	
 	@Autowired
-	public DemandaController(DemandaService demandaService, ClienteService clienteService) {
+	public DemandaController(DemandaService demandaService, ClienteService clienteService, InmuebleService inmuebleService) {
 		this.demandaService = demandaService;
 		this.clienteService = clienteService;
+		this.inmuebleService = inmuebleService;
 
 	}		
 	@GetMapping
@@ -45,6 +49,17 @@ public class DemandaController {
 			Integer numHabitaciones = demanda.getNumHabitaciones();
 			String localidad = demanda.getLocalidad();
 			String tipoVivienda = demanda.getTipoVivienda();
+		
+		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);
+		
+	 }
+	
+	@GetMapping(path = "/demandaInmueble/{idInmueble}")
+	public List<Demanda> getDemandaPorInmueble(@PathVariable("idInmueble") Integer idInmueble){		
+		Inmueble inmueble = inmuebleService.buscar(idInmueble);
+		String localidad = inmueble.getLocalidad();
+		String tipoVivienda = inmueble.getTipoVivienda();
+		Integer numHabitaciones = inmueble.getNumHabitaciones();
 		
 		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);
 		

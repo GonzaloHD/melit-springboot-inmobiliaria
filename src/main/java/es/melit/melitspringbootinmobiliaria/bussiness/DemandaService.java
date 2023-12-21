@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
+import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.DemandaDao;
 import jakarta.transaction.Transactional;
 
@@ -58,6 +59,16 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 		System.out.println("---------------");
 		
 		return dDao.findByCaracteristicas(numHabitaciones, localidad, tipoVivienda);		
+	}
+	
+	public List<Demanda> findByParametros (String localidad, String tipoVivienda, Integer numHabitaciones){
+		
+		 try {
+		        return dDao.findDemandasporIdInmueble(localidad, tipoVivienda, numHabitaciones);
+		    } catch (Exception e) {
+		        System.out.println(e.getMessage());
+		        throw new RuntimeException("Error inesperado en el servidor");
+		    }
 	}
 	
 

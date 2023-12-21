@@ -1,6 +1,5 @@
 package es.melit.melitspringbootinmobiliaria.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,9 @@ public class TransaccionController {
 
 		transaccionService.guardar(transaccion);
 	 }
+	
+//	@PostMapping(consumes = "application/json")
+//	public void registrarTeansaccionDNI(@RequestBody)
 	
 	@GetMapping(path = "{idTransaccion}")
 	public Transaccion getTransaccion(@PathVariable("idTransaccion") Integer idTransaccion){
