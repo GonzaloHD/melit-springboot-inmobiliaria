@@ -72,6 +72,7 @@ public class InmuebleController {
         return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
 	    }
 	
+
 //	@GetMapping(path = "/inmuebledemanda/{idInmueble}")
 //	public List<Inmueble> findDemandaInmuebleById (@PathVariable("idInmueble") Integer idInmueble){
 //		
@@ -82,11 +83,23 @@ public class InmuebleController {
 //        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
 //	    }	
 	
+
+
 	@GetMapping(path = "/inmueblesdemandados/{idCliente}")
 	public List<Inmueble> findInmueblesDemandadosCliente (@PathVariable Integer idCliente){
 		System.out.println(idCliente);
         return inmuebleService.findDemandadosInmueble(idCliente);
+
 	    }		
+
+	    
+	
+	@GetMapping(path = "/inmueblesmacthdemandas")
+	public List<Inmueble> cruzarInmuebleDemanda (){
+		return inmuebleService.cruzarDemandasInmubles();
+	}
+		
+
 	
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {

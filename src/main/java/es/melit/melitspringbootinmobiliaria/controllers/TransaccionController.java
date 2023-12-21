@@ -68,6 +68,11 @@ public class TransaccionController {
 
 		transaccionService.guardar(transaccion);
 	 }
+	
+//	@PostMapping(consumes = "application/json")
+//	public void registrarTeansaccionDNI(@RequestBody)
+	
+
 
 	@PutMapping(consumes = "application/json")
 	public void cambiarTransaccion(@RequestBody Transaccion transaccion) {		
