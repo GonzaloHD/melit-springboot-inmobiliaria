@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -26,6 +27,7 @@ public class Inmueble implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_inmueble")
+	@JsonIgnore
 	private Integer idInmueble;
 	private String descripcion;
 	private String direccion;
@@ -47,9 +49,11 @@ public class Inmueble implements Serializable {
 	private Empleado empleado;
 	
 	@OneToMany(mappedBy = "inmueble")
+	@JsonIgnore
 	private List<Publicacion> publicaciones;
 	
 	@OneToOne(mappedBy = "inmueble")
+	@JsonIgnore
 	private Transaccion transaccion;	
 	
 	public Inmueble() {
@@ -130,11 +134,7 @@ public class Inmueble implements Serializable {
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
 				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", publicaciones="
 				+ publicaciones + ", transaccion=" + transaccion + "]";
-	}
-	
-	
-	
-	
+	}	
 	
 
 }

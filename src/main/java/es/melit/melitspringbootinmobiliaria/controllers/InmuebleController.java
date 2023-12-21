@@ -80,16 +80,13 @@ public class InmuebleController {
 //		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
 //
 //        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
-//	    }
-	
-	
+//	    }	
 	
 	@GetMapping(path = "/inmueblesdemandados/{idCliente}")
 	public List<Inmueble> findInmueblesDemandadosCliente (@PathVariable Integer idCliente){
 		System.out.println(idCliente);
         return inmuebleService.findDemandadosInmueble(idCliente);
-	    }
-		
+	    }		
 	
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {

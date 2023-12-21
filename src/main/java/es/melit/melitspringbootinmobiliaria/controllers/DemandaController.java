@@ -40,8 +40,8 @@ public class DemandaController {
 		 return demandaService.buscar(idDemanda);
 	 }
 	
-	@GetMapping(consumes = "application/json")
-	public List<Demanda> getDemanda(@RequestBody Demanda demanda){		
+	@GetMapping(consumes = "application/json", path = "demandasporcaracteristicas")
+	public List<Demanda> getDemandaCaracteristicas(@RequestBody Demanda demanda){		
 			Integer numHabitaciones = demanda.getNumHabitaciones();
 			String localidad = demanda.getLocalidad();
 			String tipoVivienda = demanda.getTipoVivienda();

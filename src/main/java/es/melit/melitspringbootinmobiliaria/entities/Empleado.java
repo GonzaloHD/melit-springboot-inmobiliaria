@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
@@ -29,9 +30,11 @@ public class Empleado implements Serializable {
 	private String telefono;
 	
 	@OneToMany(mappedBy = "empleado")
+	@JsonIgnore
 	private List<Inmueble> inmuebles;
 	
 	@OneToMany(mappedBy = "empleado")
+	@JsonIgnore
 	private List<Transaccion> transacciones;	
 	
 	public Empleado() {

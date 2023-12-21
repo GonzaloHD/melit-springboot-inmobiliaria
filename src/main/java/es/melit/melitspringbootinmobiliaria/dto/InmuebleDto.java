@@ -11,6 +11,7 @@ public class InmuebleDto {
 	private boolean activo;
 	private Integer idCliente;
 	private Integer idEmpleado;
+	private Integer noUseful;
 	
 	public InmuebleDto() {
 		super();
