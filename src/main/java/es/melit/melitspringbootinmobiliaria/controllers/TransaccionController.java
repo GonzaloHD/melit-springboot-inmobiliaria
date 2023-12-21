@@ -1,6 +1,7 @@
 package es.melit.melitspringbootinmobiliaria.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,21 @@ public class TransaccionController {
 		 return transaccionService.listado();
 	 }	
 	
+	@GetMapping(path = "{idTransaccion}")
+	public Transaccion getTransaccion(@PathVariable("idTransaccion") Integer idTransaccion){
+		 return transaccionService.buscar(idTransaccion);
+	 }
+	
+	@GetMapping(path = "/empleado/{idEmpleado}")
+	public List<Transaccion> getTransaccionesEmpleado(@PathVariable("idEmpleado") Integer idEmpleado){
+		 return transaccionService.buscarPorEmpleado(idEmpleado);
+	 }
+	
+	@GetMapping(path = "/transaccionesmes")
+	public List<Transaccion> getTransaccion(@RequestBody Map<String, Object> fecha){
+		 return transaccionService.buscarPorMes(fecha.get("fecha").toString());
+	 }
+
 	@PostMapping(consumes = "application/json")
 	public void registrarTransaccion(@RequestBody TransaccionDto transaccionDto) {			
 		Demanda demanda = demandaService.buscar(transaccionDto.getIdDemanda());
@@ -56,10 +72,7 @@ public class TransaccionController {
 //	@PostMapping(consumes = "application/json")
 //	public void registrarTeansaccionDNI(@RequestBody)
 	
-	@GetMapping(path = "{idTransaccion}")
-	public Transaccion getTransaccion(@PathVariable("idTransaccion") Integer idTransaccion){
-		 return transaccionService.buscar(idTransaccion);
-	 }
+
 
 	@PutMapping(consumes = "application/json")
 	public void cambiarTransaccion(@RequestBody Transaccion transaccion) {		
