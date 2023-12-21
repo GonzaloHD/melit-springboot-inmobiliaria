@@ -1,22 +1,22 @@
 package es.melit.melitspringbootinmobiliaria.bussiness;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Publicacion;
 import es.melit.melitspringbootinmobiliaria.iDao.PublicacionDao;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PublicacionService implements PlantillaServicio<Publicacion> {
 	
 	public PublicacionDao pDao;	
 
-	public PublicacionService() {
-		super();
-	}
-
+	@Autowired
 	public PublicacionService(PublicacionDao pDao) {		
 		this.pDao = pDao;
 	}
@@ -51,8 +51,7 @@ public class PublicacionService implements PlantillaServicio<Publicacion> {
 			pDao.save(publicacion);
 		}catch (Exception e) {
 			throw new RuntimeException("Error inesperado en el servidor");
-		}
-		
+		}		
 	}
 
 	@Override
@@ -76,6 +75,15 @@ public class PublicacionService implements PlantillaServicio<Publicacion> {
 		if(actualizado.getCoste() != null && actualizado.getCoste()>0 && actualizado.getCoste() != actual.getCoste()) {
 			actual.setCoste(actualizado.getCoste());
 		}				
+		
+	}
+	@Transactional
+	public Publicacion cerrar(Integer idPublicacion) {
+		Publicacion actual = pDao.findById(idPublicacion).orElseThrow(()->
+		new IllegalStateException("Publicacion con id " + idPublicacion + " no existe"));
+		
+		actual.setFechaFin(Instant.now());
+		return actual;				
 		
 	}
 

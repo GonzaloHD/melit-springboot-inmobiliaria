@@ -27,7 +27,6 @@ public class Inmueble implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_inmueble")
-	@JsonIgnore
 	private Integer idInmueble;
 	private String descripcion;
 	private String direccion;

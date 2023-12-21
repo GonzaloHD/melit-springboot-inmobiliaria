@@ -1,6 +1,7 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -31,18 +32,17 @@ public class Publicacion implements Serializable {
 	@JsonProperty("idInmueble")
 	private Inmueble inmueble;
 	
-	@Temporal(TemporalType.DATE)
-	private Date fechaInicio;
-	@Temporal(TemporalType.DATE)
-	private Date fechaFin;
+	private Instant fechaInicio;
+	private Instant fechaFin;
 	
 	private Double coste;	
 
 	public Publicacion() {
 		super();
+		
 	}
 
-	public Publicacion(Inmueble inmueble, Date fechaInicio, Date fechaFin, Double coste) {
+	public Publicacion(Inmueble inmueble, Instant fechaInicio, Instant fechaFin, Double coste) {
 		super();
 		this.inmueble = inmueble;
 		this.fechaInicio = fechaInicio;
@@ -66,20 +66,20 @@ public class Publicacion implements Serializable {
 		this.inmueble = inmueble;
 	}
 
-	public Date getFechaInicio() {
+	public Instant getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(Instant fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public Instant getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
+	public void setFechaFin(Instant instant) {
+		this.fechaFin = instant;
 	}
 
 	public Double getCoste() {

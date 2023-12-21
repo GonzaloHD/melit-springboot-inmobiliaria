@@ -74,8 +74,8 @@ public class InmobiliariaConfig {
 //			String fechaString1 = "24/11/2022";
 //			String fechaString2 = "25/10/2023";
 			
-			Publicacion p1 = new Publicacion(i1, sdf.parse(fechaString3), sdf.parse(fechaString4), 5.3);
-			Publicacion p2 = new Publicacion(i2, sdf.parse(fechaString5), sdf.parse(fechaString6), 7.77);
+			Publicacion p1 = new Publicacion(i1, sdf.parse(fechaString3).toInstant(), sdf.parse(fechaString4).toInstant(), 5.3);
+			Publicacion p2 = new Publicacion(i2, sdf.parse(fechaString5).toInstant(), sdf.parse(fechaString6).toInstant(), 7.77);
 			
 			pDao.saveAll(List.of(p1,p2));
 

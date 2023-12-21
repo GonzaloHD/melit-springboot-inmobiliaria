@@ -47,16 +47,6 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		return optionalInmueble.get();			
 	}
 	
-	public List<Inmueble> findByLocalidad (String localidad){
-		
-		 try {
-		        return iDao.findByLocalidad(localidad);
-		    } catch (Exception e) {
-		        System.out.println(e.getMessage());
-		        throw new RuntimeException("Error inesperado en el servidor");
-		    }
-	}
-	
 	public List<Inmueble> findByParametros (String localidad, String tipoVivienda, Integer numHabitaciones){
 		
 		 try {

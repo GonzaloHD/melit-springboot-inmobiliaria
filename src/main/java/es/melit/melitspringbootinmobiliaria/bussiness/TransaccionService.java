@@ -1,9 +1,6 @@
 package es.melit.melitspringbootinmobiliaria.bussiness;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 import es.melit.melitspringbootinmobiliaria.iDao.TransaccionDao;
+import jakarta.transaction.Transactional;
 
 @Service
 public class TransaccionService implements PlantillaServicio<Transaccion> {
@@ -59,13 +57,11 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 	
 	public List<Transaccion> buscarPorMes(String mesAnyo){
 		
-        YearMonth yearMonth = YearMonth.parse(mesAnyo, DateTimeFormatter.ofPattern("MM/yyyy"));
+        YearMonth yearMonth = YearMonth.parse(mesAnyo, DateTimeFormatter.ofPattern("MM/yyyy"));        
         
         Integer month = yearMonth.getMonthValue();
         
         Integer year = yearMonth.getYear();
-        
-        //probar con between en SQL
 		
 		return tDao.findByMonth(month, year);			
 		
@@ -89,6 +85,7 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 		tDao.deleteById(id);		
 	}
 
+	@Transactional
 	@Override
 	public void actualizar(Transaccion actualizado) {
 		Transaccion actual = tDao.findById(actualizado.getIdTransaccion()).orElseThrow(()->

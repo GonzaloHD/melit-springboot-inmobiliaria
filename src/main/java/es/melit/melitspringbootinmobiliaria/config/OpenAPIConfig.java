@@ -42,7 +42,7 @@ public class OpenAPIConfig {
         .title("MELIT Inmobiliaria API")
         .version("1.0")
         .contact(contact)
-        .description("API sobre una inmobiliaria desarrollado cómo proyecto formativo en MELIT").termsOfService("https://www.melit.es/aviso-legal/")
+        .description("API sobre una inmobiliaria - desarrollado cómo proyecto formativo en la empresa MELIT TECHNOLOGY SERVICE").termsOfService("https://www.melit.es/aviso-legal/")
         .license(mitLicense);
 
     return new OpenAPI().info(info).servers(List.of(devServer, prodServer));

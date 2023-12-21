@@ -1,12 +1,13 @@
 package es.melit.melitspringbootinmobiliaria.dto;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class PublicacionDto {	
 	private Integer idPublicacion;	
 	private Double coste;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private Instant fechaInicio;
+	private Instant fechaFin;
 	private Integer idInmueble;
 	
 	
@@ -17,7 +18,7 @@ public class PublicacionDto {
 
 
 
-	public PublicacionDto(Double coste, Date fechaInicio, Date fechaFin, Integer idInmueble) {
+	public PublicacionDto(Double coste, Instant fechaInicio, Instant fechaFin, Integer idInmueble) {
 		super();
 		this.coste = coste;
 		this.fechaInicio = fechaInicio;
@@ -51,25 +52,25 @@ public class PublicacionDto {
 
 
 
-	public Date getFechaInicio() {
+	public Instant getFechaInicio() {
 		return fechaInicio;
 	}
 
 
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(Instant fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
 
 
-	public Date getFechaFin() {
+	public Instant getFechaFin() {
 		return fechaFin;
 	}
 
 
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(Instant fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
