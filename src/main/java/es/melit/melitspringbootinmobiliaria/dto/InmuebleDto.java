@@ -9,6 +9,8 @@ public class InmuebleDto {
 	private String tipoVivienda;
 	private Integer numHabitaciones;
 	private boolean activo;
+	private Double precio;
+	private Double metrosCuadrados;
 	private Integer idCliente;
 	private Integer idEmpleado;
 
@@ -19,7 +21,7 @@ public class InmuebleDto {
 	}
 
 	public InmuebleDto(Integer idInmueble, String descripcion, String direccion, String localidad, String tipoVivienda,
-			Integer numHabitaciones, boolean activo, Integer idCliente, Integer idEmpleado) {
+			Integer numHabitaciones, boolean activo, Double precio, Double metrosCuadrados, Integer idCliente, Integer idEmpleado) {
 		super();
 		this.idInmueble = idInmueble;
 		this.descripcion = descripcion;
@@ -28,8 +30,10 @@ public class InmuebleDto {
 		this.tipoVivienda = tipoVivienda;
 		this.numHabitaciones = numHabitaciones;
 		this.activo = activo;
+		this.precio = precio;
 		this.idCliente = idCliente;
 		this.idEmpleado = idEmpleado;
+		this.metrosCuadrados = metrosCuadrados;
 	}
 
 	public Integer getIdInmueble() {
@@ -103,13 +107,28 @@ public class InmuebleDto {
 	public void setIdEmpleado(Integer idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
+		
+	public Double getPrecio() {
+		return precio;
+	}
 
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+	
+	public Double getMetrosCuadrados() {
+		return metrosCuadrados;
+	}
+
+	public void setMetrosCuadrados(Double metrosCuadrados) {
+		this.metrosCuadrados = metrosCuadrados;
+	}
 
 	@Override
 	public String toString() {
 		return "InmuebleDto [idInmueble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
-				+ ", activo=" + activo + ", idCliente=" + idCliente + ", idEmpleado=" + idEmpleado + "]";
+				+ ", activo=" + activo + ", precio=" + precio + " , metrosCuadrados=" + metrosCuadrados + ", idCliente=" + idCliente + ", idEmpleado=" + idEmpleado + "]";
 	}
 	
 	

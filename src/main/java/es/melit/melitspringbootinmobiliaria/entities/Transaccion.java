@@ -25,6 +25,7 @@ public class Transaccion implements Serializable {
 	private Integer idTransaccion;
 	private Instant fecha;	
 	private String comentario;
+	private Double precioFinal;
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	@JsonProperty("idInmueble")	
@@ -56,6 +57,7 @@ public class Transaccion implements Serializable {
 		this.inmueble = inmueble;
 		this.demanda = demanda;
 		this.empleado = empleado;
+		this.precioFinal = inmueble.getPrecio() + (inmueble.getPrecio() *0.13);
 	}
 	public Integer getIdTransaccion() {
 		return idTransaccion;
@@ -94,10 +96,18 @@ public class Transaccion implements Serializable {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+	
+	public Double getPrecioFinal() {
+		return precioFinal;
+	}
+	public void setPrecioFinal(Double precioFinal) {
+		this.precioFinal = precioFinal;
+	}
+
 	@Override
 	public String toString() {
 		return "Transaccion [idTransaccion=" + idTransaccion + ", fecha=" + fecha
-				+ ", comentario=" + comentario + ", inmueble=" + inmueble + ", demanda=" + demanda + ", empleado="
+				+ ", comentario=" + comentario + ", precioFinal=" + precioFinal + " , inmueble=" + inmueble + ", demanda=" + demanda + ", empleado="
 				+ empleado + "]";
 	}		
 	

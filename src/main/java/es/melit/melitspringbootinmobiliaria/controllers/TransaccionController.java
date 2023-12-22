@@ -87,7 +87,7 @@ public class TransaccionController {
 	
 	@Operation(
 			summary = "Registrar una transacción por compra y venta de un inmueble", 
-			description = "Introducir la demanda, inmueble, empleado así como comentario pertinente")
+			description = "Introducir la demanda, inmueble, empleado así como comentario pertinente. Se generará fecha de transacción y precio final del inmueble")
 	@PostMapping(consumes = "application/json")
 	public void registrarTransaccion(@RequestBody TransaccionDto transaccionDto) {			
 		Demanda demanda = demandaService.buscar(transaccionDto.getIdDemanda());

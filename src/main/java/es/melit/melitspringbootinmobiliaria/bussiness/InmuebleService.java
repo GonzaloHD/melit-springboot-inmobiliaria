@@ -117,16 +117,38 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		if(inmuebleActualizado.getNumHabitaciones() != null && inmuebleActualizado.getNumHabitaciones()!= inmuebleActual.getNumHabitaciones()) {
 			inmuebleActual.setNumHabitaciones(inmuebleActualizado.getNumHabitaciones());
 		}	
-		if(inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
-			inmuebleActual.setActivo(inmuebleActualizado.isActivo());;
-		}	
+		if(inmuebleActualizado.getPrecio() != null && inmuebleActualizado.getPrecio()!= inmuebleActual.getPrecio()) {
+			inmuebleActual.setPrecio(inmuebleActualizado.getPrecio());
+		}
+		if(inmuebleActualizado.getMetrosCuadrados() != null && inmuebleActualizado.getMetrosCuadrados()!= inmuebleActual.getMetrosCuadrados()) {
+			inmuebleActual.setMetrosCuadrados(inmuebleActualizado.getMetrosCuadrados());
+		}
 		if(inmuebleActualizado.getCliente() != null && !Objects.equals(inmuebleActualizado.getCliente(), inmuebleActual.getCliente())) {
 			inmuebleActual.setCliente(inmuebleActualizado.getCliente());
 		}
 		if(inmuebleActualizado.getEmpleado() != null && !Objects.equals(inmuebleActualizado.getEmpleado(), inmuebleActual.getEmpleado())) {
 			inmuebleActual.setEmpleado(inmuebleActualizado.getEmpleado());
 		}
+		if (inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
+	        throw new RuntimeException("Para cambiar el estado del inmueble debes usar una solicitud específica (solicitud put con url: http://localhost:8084/api/inmobiliaria/inmuebles/cambiarestado)");
+	    }
 		
+	}
+	
+	@Transactional
+	public void actualizarEstado(Inmueble inmuebleActualizado) {
+	   Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmueble())
+	            .orElseThrow(() -> new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmueble() + " no existe"));
+
+	    String comentarioEstado = inmuebleActualizado.getComentarioEstado();
+	    if (comentarioEstado == null || comentarioEstado.trim().isEmpty()) {
+	        throw new RuntimeException("Debes escribir la razón por la que se cambia el estado del inmueble en comentarios");
+	    }
+
+	    if (inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
+	        inmuebleActual.setActivo(inmuebleActualizado.isActivo());
+	    }
+	    inmuebleActual.setComentarioEstado(comentarioEstado);
 	}
 
 	
