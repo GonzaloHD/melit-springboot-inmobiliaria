@@ -1,8 +1,8 @@
 package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,8 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
@@ -35,19 +34,24 @@ public class Publicacion implements Serializable {
 	private Instant fechaInicio;
 	private Instant fechaFin;
 	
-	private Double coste;	
+	@Column(nullable = false)
+	private Double costeDiario;
+	
+	@Column(nullable = true)
+	private Double ingresoFinalPublicacion;
+	
+	@Transient
+	private double ingresoActualPublicación;
 
 	public Publicacion() {
-		super();
-		
+		super();		
 	}
 
-	public Publicacion(Inmueble inmueble, Instant fechaInicio, Instant fechaFin, Double coste) {
+	public Publicacion(Inmueble inmueble, Instant fechaInicio, Double coste) {
 		super();
 		this.inmueble = inmueble;
 		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.coste = coste;
+		this.costeDiario = coste;
 	}
 
 	public Integer getIdPublicacion() {
@@ -78,24 +82,40 @@ public class Publicacion implements Serializable {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Instant instant) {
-		this.fechaFin = instant;
+	public void setFechaFin(Instant fechaFin) {
+		this.fechaFin = fechaFin;
+		this.ingresoFinalPublicacion = Math.round((100.00*(double)Duration.between(this.fechaInicio, fechaFin).toSeconds()/86400.00)*(this.costeDiario))/100.00;
 	}
 
-	public Double getCoste() {
-		return coste;
+	public Double getCosteDiario() {
+		return costeDiario;
 	}
 
-	public void setCoste(Double coste) {
-		this.coste = coste;
+	public void setCosteDiario(Double costeDiario) {
+		this.costeDiario = costeDiario;
+	}
+
+	public Double getIngresoFinalPublicacion() {
+		return ingresoFinalPublicacion;
+	}
+
+	public void setIngresoFinalPublicacion(Double ingresoFinalPublicacion) {
+		this.ingresoFinalPublicacion = ingresoFinalPublicacion;
+	}
+
+	public double getIngresoActualPublicación() {
+		return this.ingresoActualPublicación = Math.round(((double)Duration.between(this.fechaInicio, Instant.now()).toSeconds()/86400.00)*(this.costeDiario)*100.00)/100.00;
+	}
+
+
+	public void setIngresoActualPublicación(double ingresoActualPublicación) {
+		this.ingresoActualPublicación = ingresoActualPublicación;
 	}
 
 	@Override
 	public String toString() {
 		return "Publicacion [idPublicacion=" + idPublicacion + ", inmueble=" + inmueble + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + ", coste=" + coste + "]";
-	}
-	
-	
+				+ ", fechaFin=" + fechaFin + ", coste=" + costeDiario + "]";
+	}	
 	
 }

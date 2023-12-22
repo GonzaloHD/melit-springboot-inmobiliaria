@@ -49,8 +49,8 @@ public class InmobiliariaConfig {
 			
 			iDao.saveAll(List.of(i1,i2,i3,i4,i5));			
 			
-			Demanda d1 = new Demanda("Quiero una casa muy grande", "Almeria", 1, "Piso", c1);
-			Demanda d2 = new Demanda("Quiero una casa muy pequeña", "Armenia", 4, "Castillo", c2);
+			Demanda d1 = new Demanda("Quiero una casa muy grande", "Almeria", 1, "Piso", c1, true);
+			Demanda d2 = new Demanda("Quiero una casa muy pequeña", "Armenia", 4, "Castillo", c2, true);
 			
 			dDao.saveAll(List.of(d1,d2));
 			
@@ -64,18 +64,16 @@ public class InmobiliariaConfig {
 			tDao.saveAll(List.of(t1,t2,t3,t4,t5));
 			
 			String fechaString3 = "24/01/2022";
-			String fechaString4 = "25/10/2022";
 			
 			String fechaString5 = "24/10/2022";
-			String fechaString6 = "25/01/2023";
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
 //			String fechaString1 = "24/11/2022";
 //			String fechaString2 = "25/10/2023";
 			
-			Publicacion p1 = new Publicacion(i1, sdf.parse(fechaString3).toInstant(), sdf.parse(fechaString4).toInstant(), 5.3);
-			Publicacion p2 = new Publicacion(i2, sdf.parse(fechaString5).toInstant(), sdf.parse(fechaString6).toInstant(), 7.77);
+			Publicacion p1 = new Publicacion(i1, sdf.parse(fechaString3).toInstant(), 2.55);
+			Publicacion p2 = new Publicacion(i2, sdf.parse(fechaString5).toInstant(), 2.78);
 			
 			pDao.saveAll(List.of(p1,p2));
 

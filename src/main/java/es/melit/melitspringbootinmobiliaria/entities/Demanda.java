@@ -18,7 +18,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @SuppressWarnings("serial")
 @Entity
@@ -33,6 +32,7 @@ public class Demanda implements Serializable {
 	private String localidad;
 	private Integer numHabitaciones;
 	private String tipoVivienda;
+	private boolean activa;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_cliente", nullable = false)
@@ -47,13 +47,14 @@ public class Demanda implements Serializable {
 		super();
 	}
 	
-	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente) {
+	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente, boolean activa) {
 		super();
 		this.descripcion = descripcion;
 		this.localidad = localidad;
 		this.numHabitaciones = numHabitaciones;
 		this.tipoVivienda = tipoVivienda;
-		this.cliente = cliente;		
+		this.cliente = cliente;	
+		this.activa = activa;
 	}
 	
 	public Integer getIdDemanda() {
@@ -99,12 +100,23 @@ public class Demanda implements Serializable {
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
 	}
+		
+	public boolean isActiva() {
+		return activa;
+	}
+
+	public void setActiva(boolean activa) {
+		this.activa = activa;
+	}
+
 	@Override
 	public String toString() {
 		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", localidad=" + localidad
-				+ ", numHabitaciones=" + numHabitaciones + ", tipoVivienda=" + tipoVivienda + ", cliente=" + cliente
-				+ ", transacciones=" + transacciones + "]";
+				+ ", numHabitaciones=" + numHabitaciones + ", tipoVivienda=" + tipoVivienda + ", activa=" + activa
+				+ ", cliente=" + cliente + ", transacciones=" + transacciones + "]";
 	}
+
+	
 
 	
 	

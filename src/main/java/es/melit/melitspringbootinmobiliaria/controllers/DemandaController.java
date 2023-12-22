@@ -18,8 +18,11 @@ import es.melit.melitspringbootinmobiliaria.dto.DemandaDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
+@Tag(name = "Demandas de clientes", description = "Operaciones sobre demandas. CRUD y busqueda de publicaciones")
 @RequestMapping(path = "/demandas")
 public class DemandaController {	
 	
@@ -33,18 +36,28 @@ public class DemandaController {
 		this.clienteService = clienteService;
 		this.inmuebleService = inmuebleService;
 
-	}		
+	}
+	
+	@Operation(
+			summary = "Listar todas las demandas de clientes", 
+			description = "Devuelve todas las demandas de clientes")
 	@GetMapping
 	public List<Demanda> getDemandas(){
 		 return demandaService.listado();
 	 }	
-	
+	@Operation(
+			summary = "Busca demanda por id", 
+			description = "Devuelve demanda por id de la demanda")
 	@GetMapping(path = "{idDemanda}")
 	public Demanda getDemanda(@PathVariable("idDemanda") Integer idDemanda){
 		 return demandaService.buscar(idDemanda);
 	 }
 	
-	@GetMapping(consumes = "application/json", path = "/demandasporcaracteristicas")
+	@Operation(
+			summary = "Busca demanda por características", 
+			description = "Devuelve todas las demandas por características, numero habitaciones, localidad y tipo de vivienda."
+					+ " Formato de solicitud en json")
+	@PostMapping(consumes = "application/json", path = "/demandasporcaracteristicas")
 	public List<Demanda> getDemandaCaracteristicas(@RequestBody Demanda demanda){		
 			Integer numHabitaciones = demanda.getNumHabitaciones();
 			String localidad = demanda.getLocalidad();
@@ -54,6 +67,10 @@ public class DemandaController {
 		
 	 }
 	
+	@Operation(
+			summary = "Busca demandas que coinciden con un inmueble por id", 
+			description = "Devuelve todas las demandas que coinciden"
+					+ " con las características de numero habitaciones, localidad y tipo de vivienda de un inmuelbe ingresado por su id")
 	@GetMapping(path = "/demandaInmueble/{idInmueble}")
 	public List<Demanda> getDemandaPorInmueble(@PathVariable("idInmueble") Integer idInmueble){		
 		Inmueble inmueble = inmuebleService.buscar(idInmueble);
@@ -65,6 +82,9 @@ public class DemandaController {
 		
 	 }
 	
+	@Operation(
+			summary = "Registrar demanda de cliente", 
+			description = "Ingresa una nueva demanda para un cliente")
 	@PostMapping(consumes = "application/json")
 	public void registrarDemanda(@RequestBody DemandaDto demandaDto) {			
 		Cliente cliente = clienteService.buscar(demandaDto.getIdCliente());
@@ -72,12 +92,14 @@ public class DemandaController {
 		String localidad = demandaDto.getLocalidad();
 		Integer numHabitaciones = demandaDto.getNumHabitaciones();
 		String tipoVivienda = demandaDto.getTipoVivienda();
-		Demanda demanda = new Demanda(descripcion, localidad, numHabitaciones, tipoVivienda, cliente);
+		Demanda demanda = new Demanda(descripcion, localidad, numHabitaciones, tipoVivienda, cliente, true);
 		demandaService.guardar(demanda);
 
 	 }
 
-
+	@Operation(
+			summary = "Modificar demanda", 
+			description = "Devuelve todas las transacciones registradas")
 	@PutMapping(consumes = "application/json")
 	public void cambiarDemanda(@RequestBody Demanda demanda) {		
 		demandaService.actualizar(demanda);

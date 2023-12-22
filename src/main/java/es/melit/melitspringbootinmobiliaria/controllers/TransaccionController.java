@@ -1,15 +1,14 @@
 package es.melit.melitspringbootinmobiliaria.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,16 +65,14 @@ public class TransaccionController {
 		 return transaccionService.buscarPorEmpleado(idEmpleado);
 	 }
 	
-//	@Operation(
-//			summary = "Buscar transacciones del mes", 
-//			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año")
-//	@GetMapping(path = "/transaccionesdelmes/")
-//	public List<Transaccion> getTransaccionesMes(@RequestBody FechaMesAnyo fecha, 
-////			@RequestHeader(name = "Content-Type", defaultValue = "application/json") 
-//	String contentType){		
-//		System.out.println(fecha.getFecha());
-//		 return transaccionService.buscarPorMes(fecha.getFecha());
-//	}
+	@Operation(
+			summary = "Buscar transacciones del mes", 
+			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año, envíado en formato json.")
+	@PostMapping(path = "/transaccionesdelmes/", consumes = "application/json")
+	public List<Transaccion> getTransaccionesDelMes(@RequestBody FechaMesAnyo fecha){		
+		System.out.println(fecha.getFecha());
+		 return transaccionService.buscarPorMes(fecha.getFecha());
+	}
 	
 	@Operation(
 			summary = "Buscar transacciones por mes y año", 
@@ -97,8 +94,7 @@ public class TransaccionController {
 		Transaccion transaccion = new Transaccion(comentario, inmueble, demanda, empleado);
 
 		transaccionService.guardar(transaccion);
-	 }
-	
+	 }	
 
 //	@PostMapping(consumes = "application/json")
 //	public void registrarTeansaccionDNI(@RequestBody)	
@@ -127,6 +123,14 @@ public class TransaccionController {
 	@PutMapping(consumes = "application/json")
 	public void cambiarTransaccion(@RequestBody Transaccion transaccion) {		
 		transaccionService.actualizar(transaccion);
+	}
+	
+	@Operation(
+			summary = "Eliminar transacción", 
+			description = "Envía solicitud para eliminar transacción")
+	@DeleteMapping(path = "{idTransaccion}")
+	public void deleteTransaccion(@PathVariable("idTransaccion") Integer idTransaccion) {
+		transaccionService.eliminar(idTransaccion);
 	}
 	
 }

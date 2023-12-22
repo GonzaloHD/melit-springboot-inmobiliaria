@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class PublicacionController {
 		this.publicacionService = publicacionService;
 		this.inmuebleService = inmuebleService;
 	}
+	
 	@Operation(
 			summary = "Devuelve todas las publicaciones", 
 			description = "Devuelve todas las publicaciones que se han registrado")
@@ -40,6 +42,15 @@ public class PublicacionController {
 	public List<Publicacion> getPublicaciones(){
 		 return publicacionService.listado();
 	 }	
+	
+	@Operation(
+			summary = "Devuelve todas las publicaciones activas", 
+			description = "Devuelve todas las publicaciones activas que no han sido cerradas")
+	@GetMapping(path = "/activas/")
+	public List<Publicacion> getPublicacionesActivas(){
+		 return publicacionService.listadoActivas();
+	 }	
+	
 	@Operation(
 			summary = "Modificar publicaciones", 
 			description = "Devuelve todas las transacciones registradas")
@@ -48,10 +59,9 @@ public class PublicacionController {
 		
 		Inmueble inmueble = inmuebleService.buscar(publicacionDto.getIdInmueble());
 		Double coste = publicacionDto.getCoste();
-		Instant fechaInicio = publicacionDto.getFechaInicio();
-		Instant fechaFin = publicacionDto.getFechaFin();
+		Instant fechaInicio = publicacionDto.getFechaInicio();		
 		
-		Publicacion publicacion = new Publicacion(inmueble, fechaInicio, fechaFin, coste);
+		Publicacion publicacion = new Publicacion(inmueble, fechaInicio, coste);
 		
 		publicacionService.guardar(publicacion);
 	 }
@@ -74,10 +84,18 @@ public class PublicacionController {
 	
 	@Operation(
 			summary = "Cerrar publicación", 
-			description = "Introduce fecha final de publicación automaticamente al momento de cerrarla introduciendo id de la publicación a cerrar")
+			description = "Comprueba si existe la publicación y si no esta ya cerrada, en cuyo caso le pone fecha de cierre a la misma")
 	@PutMapping(path = "{idPublicacion}")
 	public Publicacion cerrarPublicacion(@PathVariable("idPublicacion") Integer idPublicacion) {		
 		return publicacionService.cerrar(idPublicacion);
+	}
+	
+	@Operation(
+			summary = "Elimina publicación", 
+			description = "Elimina la publicación por id")
+	@DeleteMapping(path = "{idPublicacion}")
+	public void eliminarPublicacion(@PathVariable("idPublicacion") Integer idPublicacion) {
+		publicacionService.eliminar(idPublicacion);
 	}
 	
 }
