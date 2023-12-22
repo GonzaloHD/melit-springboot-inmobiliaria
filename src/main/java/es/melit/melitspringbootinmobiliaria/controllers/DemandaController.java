@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
 import es.melit.melitspringbootinmobiliaria.bussiness.DemandaService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
+import es.melit.melitspringbootinmobiliaria.dto.DemandaCaracteristicasDto;
 import es.melit.melitspringbootinmobiliaria.dto.DemandaDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
@@ -58,13 +59,22 @@ public class DemandaController {
 			description = "Devuelve todas las demandas por características, numero habitaciones, localidad y tipo de vivienda."
 					+ " Formato de solicitud en json")
 	@PostMapping(consumes = "application/json", path = "/demandasporcaracteristicas")
-	public List<Demanda> getDemandaCaracteristicas(@RequestBody Demanda demanda){		
+	public List<Demanda> getDemandaCaracteristicas(@RequestBody DemandaCaracteristicasDto demanda){		
 			Integer numHabitaciones = demanda.getNumHabitaciones();
 			String localidad = demanda.getLocalidad();
 			String tipoVivienda = demanda.getTipoVivienda();
 		
-		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);
-		
+		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);		
+	 }
+	
+	@Operation(
+			summary = "Busca demanda por características", 
+			description = "Devuelve todas las demandas por características, numero habitaciones, localidad y tipo de vivienda."
+					+ " Formato de solicitud en json")
+	@GetMapping(consumes = "application/json", path = "/{localidad}{numHabitaciones}{tipoVivienda}")
+	public List<Demanda> getDemandaCaracteristicasFormulario(@PathVariable("localidad") String localidad,
+			@PathVariable("numHabitaciones") Integer numHabitaciones, @PathVariable("tipoVivienda") String tipoVivienda){		
+		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);		
 	 }
 	
 	@Operation(

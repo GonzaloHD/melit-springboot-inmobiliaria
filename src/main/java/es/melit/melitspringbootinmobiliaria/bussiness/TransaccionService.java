@@ -1,5 +1,6 @@
 package es.melit.melitspringbootinmobiliaria.bussiness;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -66,6 +67,18 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 		return tDao.findByMonth(month, year);			
 		
 	}
+	
+//	public List<Transaccion> buscarPorPeriodo(String fechaInicial, String fechaFinal){
+//        LocalDate fechaInicio = LocalDate.parse(fechaInicial, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+//        LocalDate fechaFin = LocalDate.parse(fechaInicial.ofPattern("dd/MM/yyyy"));
+//
+//        // Extract year, month, and day
+//        int year = date.getYear();
+//        int month = date.getMonthValue();
+//        int day = date.getDayOfMonth();
+//	}
+	
+	
 
 	@Override
 	public void guardar(Transaccion inmueble) {
