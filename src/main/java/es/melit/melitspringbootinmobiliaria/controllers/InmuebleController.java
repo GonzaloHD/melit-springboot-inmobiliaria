@@ -20,9 +20,11 @@ import es.melit.melitspringbootinmobiliaria.dto.InmuebleDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-
+@Tag(name = "Gestion de inmuebles", description = "CRUD y funcionalidad de inmuebles")
 @RequestMapping(path = "/inmuebles")
 public class InmuebleController {
 	
@@ -36,18 +38,25 @@ public class InmuebleController {
 		this.gestionClientes = gestionClientes;
 		this.empleadoService = empleadoService;
 
-	}		
+	}
+	@Operation(
+			   summary = "Listar todos los inmuebles", 
+			   description = "Método get para obtener listado completo de inmuebles")
 	@GetMapping
 	public List<Inmueble> getInmuebles(){
 
 		 return inmuebleService.listado();
 	 }	
 	
+	@Operation(
+			   summary = "Proporciona información de un inmueble", 
+			   description = "Encuentra y trae la información de un inmueble a partir de un id enviado por path en la url")
 	@GetMapping(path = "{idInmueble}")
 	public Inmueble getInmueble(@PathVariable("idInmueble") Integer idInmueble){
 		 return inmuebleService.buscar(idInmueble);
 	 }
 	
+
 	@GetMapping(path = "/busquedaformulario/{localidad}/{tipoVivienda}/{numHabitaciones}")
 	public List<Inmueble> findByCaracterísticas (@PathVariable("localidad") @RequestParam(required = false) String localidad, 
 			@PathVariable("tipoVivienda") @RequestParam(required = false) String tipoVivienda, 
@@ -56,6 +65,10 @@ public class InmuebleController {
         return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
 	}
 	
+	@Operation(
+			   summary = "Listar todos los inmuebles que coincidan con ciertos parámetros", 
+			   description = "Envío de un json con los parámetros localidad, tipoVivienda y numHabitaciones para "
+			   		+ "obtener la lista de inmuebles que se ajustan a estos criterios")
 	@GetMapping(path = "/busquedaparametros")
 	public List<Inmueble> findByParametros (@RequestBody InmuebleDto inmuebleDto){
 		
@@ -67,17 +80,7 @@ public class InmuebleController {
         
 	}
 	
-	@GetMapping(path = "/inmuebledemanda")
-	public List<Inmueble> findDemandaInmueble (@RequestBody InmuebleDto inmuebleDto){
-		
-		String localidad = inmuebleDto.getLocalidad();
-		String tipoVivienda = inmuebleDto.getTipoVivienda();
-		Integer numHabitaciones = inmuebleDto.getNumHabitaciones();
-
-        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
-	    }
 	
-
 //	@GetMapping(path = "/inmuebledemanda/{idInmueble}")
 //	public List<Inmueble> findDemandaInmuebleById (@PathVariable("idInmueble") Integer idInmueble){
 //		
@@ -88,23 +91,29 @@ public class InmuebleController {
 //        return inmuebleService.findByParametros(localidad, tipoVivienda, numHabitaciones);
 //	    }	
 	
-
-
+	@Operation(
+			   summary = "Listar todos los inmuebles que se ajusten a la demanda de un cliente", 
+			   description = "Introducir por path de url el id de un cliente para listar los "
+			   		+ "inmuebles que se ajusten a alguna de sus demandas")
 	@GetMapping(path = "/inmueblesdemandados/{idCliente}")
 	public List<Inmueble> findInmueblesDemandadosCliente (@PathVariable Integer idCliente){
 		System.out.println(idCliente);
         return inmuebleService.findDemandadosInmueble(idCliente);
-
 	    }		
 	    
-	
+	@Operation(
+			   summary = "Listar todos los inmuebles que coincidan con alguna demanda", 
+			   description = "Cruza los datos de inmuebles con los de demandas y devuelve "
+			   		+ "los que coincidan en localidad, tipo de vivienda y número de habitaciones")
 	@GetMapping(path = "/inmueblesmacthdemandas")
 	public List<Inmueble> cruzarInmuebleDemanda (){
 		return inmuebleService.cruzarDemandasInmubles();
 	}
-		
-
 	
+	@Operation(
+			   summary = "Registrar un inmueble", 
+			   description = "Envío de json con los datos del inmueble y el id de cliente "
+			   		+ "propietario para registarlo. El id de empleado es optativo")
 	@PostMapping(consumes = "application/json")
 	public void registerInmueble(@RequestBody InmuebleDto inmuebleDto) {
 		Cliente cliente = gestionClientes.buscar(inmuebleDto.getIdCliente());
@@ -126,12 +135,18 @@ public class InmuebleController {
 		inmuebleService.guardar(inmuebleDao);
 		
 	 }	
-		
+	
+	@Operation(
+			   summary = "Modificar un inmueble", 
+			   description = "Envío de json con el id del inmueble y los parámetros que se desean modificar")
 	@PutMapping(consumes = "application/json")
 	public void changeInmueble(@RequestBody Inmueble inmueble) {		
 		inmuebleService.actualizar(inmueble);
 	}	
 	
+	@Operation(
+			   summary = "Borrar un inmueble", 
+			   description = "Borrar inmueble introduciendo su id en el path de url")
 	@DeleteMapping("/{id}")
 	public void deleteInmueble(@PathVariable Integer id) {
 		inmuebleService.eliminar(id);

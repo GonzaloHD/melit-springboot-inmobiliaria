@@ -26,6 +26,7 @@ import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
 @RestController
 @Tag(name = "Transacciones de compra-venta", description = "Operaciones sobre transacciones. CRUD y busqueda de transacciones")
 @RequestMapping(path = "/transacciones")
@@ -98,12 +99,31 @@ public class TransaccionController {
 		transaccionService.guardar(transaccion);
 	 }
 	
+
 //	@PostMapping(consumes = "application/json")
 //	public void registrarTeansaccionDNI(@RequestBody)	
 
 	@Operation(
 			summary = "Modificar transacción", 
 			description = "Modificar comentario de la transacción, el resto de valores no se considera que se deban modificar")
+
+//	@Operation(
+//			   summary = "Hacer transacción sin necesidad del id de la demanda", 
+//			   description = "Introducir dni del cliente, id de empleado, id del inmueble y un comentario")
+//	@PostMapping(path = "/creaciodni/{dniCliente}/{idEmpleado}/{idInmueble}/{comentario}")
+//	public void registrarTeansaccionDNI(@PathVariable("dniCliente") String dniCliente, 
+//										@PathVariable("idEmpleado") Integer idEmpleado,
+//										@PathVariable("idInmueble") Integer idInmueble,
+//										@PathVariable("comentario") String comentario) {
+//		Demanda demanda = demandaService.buscarPorIdInmuebleDniEmpleado(idInmueble, dniCliente);
+//		Inmueble inmueble = inmuebleService.buscar(idInmueble);
+//		Empleado empleado = empleadoService.buscar(idEmpleado);
+//		
+//		Transaccion transaccion = new Transaccion(comentario, inmueble, demanda, empleado);
+//		transaccionService.guardar(transaccion);
+//	}
+	
+
 	@PutMapping(consumes = "application/json")
 	public void cambiarTransaccion(@RequestBody Transaccion transaccion) {		
 		transaccionService.actualizar(transaccion);

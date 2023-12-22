@@ -34,4 +34,16 @@ public interface DemandaDao extends JpaRepository<Demanda,Integer>{
 		                                @Param("tipoVivienda") String tipoVivienda,
 		                                @Param("numHabitaciones") Integer numHabitaciones);
 	
+		
+	@Query("SELECT d FROM Demanda d " +
+		       "JOIN Transaccion t ON d.idDemanda = t.demanda.idDemanda " +
+		       "JOIN Inmueble i ON t.inmueble.idInmueble = i.idInmueble " +
+		       "WHERE i.idInmueble = :idInmueble " +
+		       "AND d.numHabitaciones = i.numHabitaciones " +
+		       "AND UPPER(d.tipoVivienda) = UPPER(i.tipoVivienda) " +
+		       "AND UPPER(d.localidad) = UPPER(i.localidad) " +
+		       "AND UPPER(d.cliente.nif) = UPPER(:dniCliente)")
+	Demanda findDemandaByInmuebleIdAndClienteDni(@Param("idInmueble") Integer idInmueble, @Param("dniCliente") String dniCliente);
+
+	
 }

@@ -11,7 +11,7 @@ public class InmuebleDto {
 	private boolean activo;
 	private Integer idCliente;
 	private Integer idEmpleado;
-	private Integer noUseful;
+
 	
 	public InmuebleDto() {
 		super();
@@ -103,16 +103,7 @@ public class InmuebleDto {
 	public void setIdEmpleado(Integer idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
-	
-	
 
-	public Integer getNoUseful() {
-		return noUseful;
-	}
-
-	public void setNoUseful(Integer noUseful) {
-		this.noUseful = noUseful;
-	}
 
 	@Override
 	public String toString() {
