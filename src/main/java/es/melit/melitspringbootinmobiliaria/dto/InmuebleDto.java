@@ -11,17 +11,17 @@ public class InmuebleDto {
 	private boolean activo;
 	private Integer idCliente;
 	private Integer idEmpleado;
-	private Integer noUseful;
+
 	
 	public InmuebleDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InmuebleDto(Integer idInmuble, String descripcion, String direccion, String localidad, String tipoVivienda,
+	public InmuebleDto(Integer idInmueble, String descripcion, String direccion, String localidad, String tipoVivienda,
 			Integer numHabitaciones, boolean activo, Integer idCliente, Integer idEmpleado) {
 		super();
-		this.idInmueble = idInmuble;
+		this.idInmueble = idInmueble;
 		this.descripcion = descripcion;
 		this.direccion = direccion;
 		this.localidad = localidad;
@@ -36,8 +36,8 @@ public class InmuebleDto {
 		return idInmueble;
 	}
 
-	public void setIdInmuble(Integer idInmuble) {
-		this.idInmueble = idInmuble;
+	public void setIdInmueble(Integer idInmueble) {
+		this.idInmueble = idInmueble;
 	}
 
 	public String getDescripcion() {
@@ -106,7 +106,7 @@ public class InmuebleDto {
 
 	@Override
 	public String toString() {
-		return "InmuebleDto [idInmuble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
+		return "InmuebleDto [idInmueble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
 				+ ", activo=" + activo + ", idCliente=" + idCliente + ", idEmpleado=" + idEmpleado + "]";
 	}

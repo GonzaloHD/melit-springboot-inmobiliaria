@@ -71,6 +71,19 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 		    }
 	}
 	
+	public Demanda buscarPorIdInmuebleDniEmpleado (Integer idInmueble, String dniCliente) {
+		Optional<Demanda> optionalDemanda;
+		try {
+			optionalDemanda = Optional.of(dDao.findDemandaByInmuebleIdAndClienteDni(idInmueble, dniCliente));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException("Error inesperado en el servidor");
+		}
+		if(optionalDemanda.isEmpty()) {
+			throw new IllegalStateException("Demanda buscada no existe");		}
+		return optionalDemanda.get();
+	}
+	
 
 	@Override
 	public void guardar(Demanda demanda) {

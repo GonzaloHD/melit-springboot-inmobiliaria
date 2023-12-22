@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
+import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
 import jakarta.transaction.Transactional;
 
@@ -85,7 +86,7 @@ public class ClienteService implements PlantillaServicio<Cliente> {
 		if(actualizado.getEmail() != null && actualizado.getEmail().length()>0 && !Objects.equals(actualizado.getEmail(), clienteActual.getEmail())) {
 			clienteActual.setEmail(actualizado.getEmail());
 		}	
-		if(actualizado.getNif() != null && actualizado.getNif().length()>0 && !Objects.equals(actualizado.getEmail(), clienteActual.getEmail())) {
+		if(actualizado.getNif() != null && actualizado.getNif().length()>0 && !Objects.equals(actualizado.getNif(), clienteActual.getNif())) {
 			clienteActual.setNif(actualizado.getNif());
 		}	
 		if(actualizado.getNombre() != null && actualizado.getNombre().length()>0 && !Objects.equals(actualizado.getNombre(), clienteActual.getNombre())) {
@@ -94,8 +95,9 @@ public class ClienteService implements PlantillaServicio<Cliente> {
 		if(actualizado.getTelefono() != null && actualizado.getTelefono().length()>0 && !Objects.equals(actualizado.getTelefono(), clienteActual.getTelefono())) {
 			clienteActual.setTelefono(actualizado.getTelefono());
 		}
-				
+						
 	}
+
 	
 	@Override
 	public void eliminar(Integer id) {
