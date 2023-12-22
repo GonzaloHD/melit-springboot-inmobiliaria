@@ -56,7 +56,10 @@ public class InmuebleController {
 		 return inmuebleService.buscar(idInmueble);
 	 }
 	
-
+	@Operation(
+			   summary = "Listar todos los inmuebles que coincidan con ciertos parámetros", 
+			   description = "Envío por path url de los parámetros localidad, tipoVivienda y numHabitaciones para "
+			   		+ "obtener la lista de inmuebles que se ajustan a estos criterios")
 	@GetMapping(path = "/busquedaformulario/{localidad}/{tipoVivienda}/{numHabitaciones}")
 	public List<Inmueble> findByCaracterísticas (@PathVariable("localidad") @RequestParam(required = false) String localidad, 
 			@PathVariable("tipoVivienda") @RequestParam(required = false) String tipoVivienda, 
@@ -69,7 +72,7 @@ public class InmuebleController {
 			   summary = "Listar todos los inmuebles que coincidan con ciertos parámetros", 
 			   description = "Envío de un json con los parámetros localidad, tipoVivienda y numHabitaciones para "
 			   		+ "obtener la lista de inmuebles que se ajustan a estos criterios")
-	@GetMapping(path = "/busquedaparametros")
+	@PostMapping(consumes = "application/json", path = "/busquedaparametros")
 	public List<Inmueble> findByParametros (@RequestBody InmuebleDto inmuebleDto){
 		
 		String localidad = inmuebleDto.getLocalidad();
@@ -127,6 +130,8 @@ public class InmuebleController {
 		inmuebleDao.setLocalidad(inmuebleDto.getLocalidad());
 		inmuebleDao.setNumHabitaciones(inmuebleDto.getNumHabitaciones());
 		inmuebleDao.setTipoVivienda(inmuebleDto.getTipoVivienda());
+		inmuebleDao.setPrecio(inmuebleDto.getPrecio());
+		inmuebleDao.setMetrosCuadrados(inmuebleDto.getMetrosCuadrados());
 		if (inmuebleDto.getIdEmpleado() != null) {
 			Empleado empleado = empleadoService.buscar(inmuebleDto.getIdEmpleado());
 			inmuebleDao.setEmpleado(empleado);
@@ -142,6 +147,15 @@ public class InmuebleController {
 	@PutMapping(consumes = "application/json")
 	public void changeInmueble(@RequestBody Inmueble inmueble) {		
 		inmuebleService.actualizar(inmueble);
+	}	
+	
+	@Operation(
+			   summary = "Cambiar el estado de un inmueble", 
+			   description = "Envio de json del estado actual del inmueble: true para activarlo, false para desactivarlo. "
+			   		+ "Son necesarios los parámetris idInmueble, estado y comentario")
+	@PutMapping(consumes = "application/json", path = "/cambiarestado")
+	public void changeEstadoInmueble(@RequestBody Inmueble inmueble) {		
+		inmuebleService.actualizarEstado(inmueble);
 	}	
 	
 	@Operation(

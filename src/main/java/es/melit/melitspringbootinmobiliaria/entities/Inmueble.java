@@ -34,6 +34,9 @@ public class Inmueble implements Serializable {
 	private String tipoVivienda;
 	private Integer numHabitaciones;
 	private boolean activo;
+	private String comentarioEstado;
+	private Double precio;
+	private Double metrosCuadrados;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_cliente", nullable = false)
@@ -59,7 +62,7 @@ public class Inmueble implements Serializable {
 		super();
 	}
 		public Inmueble(String descripcion, String direccion, String localidad, String tipoVivienda, Integer numHabitaciones,
-			boolean activo, Cliente cliente, Empleado empleado) {
+			boolean activo, Cliente cliente, Empleado empleado, Double precio, Double metrosCuadrados) {
 		super();
 		this.descripcion = descripcion;
 		this.direccion = direccion;
@@ -69,8 +72,10 @@ public class Inmueble implements Serializable {
 		this.activo = activo;
 		this.cliente = cliente;
 		this.empleado = empleado;
-	
-	}
+		this.precio = precio;
+		this.metrosCuadrados = metrosCuadrados;
+		}
+		
 	public Integer getIdInmueble() {
 		return idInmueble;
 	}
@@ -127,12 +132,34 @@ public class Inmueble implements Serializable {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+		
+	public String getComentarioEstado() {
+		return comentarioEstado;
+	}
+	public void setComentarioEstado(String comentario) {
+		this.comentarioEstado = comentario;
+	}
+	
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+	
+	public Double getMetrosCuadrados() {
+		return metrosCuadrados;
+	}
+	public void setMetrosCuadrados(Double metrosCuadrados) {
+		this.metrosCuadrados = metrosCuadrados;
+	}
 	@Override
 	public String toString() {
 		return "Inmueble [idInmueble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
 				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", publicaciones="
-				+ publicaciones + ", transaccion=" + transaccion + "]";
+				+ publicaciones + ", transaccion=" + transaccion + ", comentarioEstado=" + comentarioEstado + ", precio=" + precio + " , metrosCuadrados" + metrosCuadrados + " ]";
 	}	
 	
 

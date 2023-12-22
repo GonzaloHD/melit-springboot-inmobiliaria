@@ -40,11 +40,11 @@ public class InmobiliariaConfig {
 			
 			eDao.saveAll(List.of(e1,e2));
 
-			Inmueble i1 = new Inmueble("PRIMERO", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1);
-			Inmueble i2 = new Inmueble("OTRA", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2);	
-			Inmueble i3 = new Inmueble("TRES", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1);
-			Inmueble i4 = new Inmueble("CUATRO", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2);	
-			Inmueble i5 = new Inmueble("CINCO", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1);
+			Inmueble i1 = new Inmueble("PRIMERO", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1, 150000.0, 98.00);
+			Inmueble i2 = new Inmueble("OTRA", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2, 200000.0, 80.6);	
+			Inmueble i3 = new Inmueble("TRES", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1, 97500.0, 70.00);
+			Inmueble i4 = new Inmueble("CUATRO", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2, 100000.0, 67.00);	
+			Inmueble i5 = new Inmueble("CINCO", "Calle asdf", "Almeria", "Dupex", 1, false, c1, e1, 200000.0, 150.00);
 //			Inmueble i6 = new Inmueble("OTRA MAS", "Calle asdf asdfw", "Madrid", "Piso", 3, false, c2, e2);	
 			
 			iDao.saveAll(List.of(i1,i2,i3,i4,i5));			
