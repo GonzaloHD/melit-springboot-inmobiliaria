@@ -35,8 +35,8 @@ public class InmobiliariaConfig {
 			
 			cDao.saveAll(List.of(c1,c2));
 			
-			Empleado e1 = new Empleado("UNO", "Jorje", "Sin casa","HOLA" , "sdffsdf@ewr.sda", "654");
-			Empleado e2 = new Empleado("DOS", "Jorje", "Sin casa","HOLA" , "sdffsdf@ewr.sda", "654");
+			Empleado e1 = new Empleado("UNO", "Jorje", "Sin casa","HOLA" , "sdffsdf@ewr.sda", "654", true);
+			Empleado e2 = new Empleado("DOS", "Jorje", "Sin casa","HOLA" , "sdffsdf@ewr.sda", "654", true);
 			
 			eDao.saveAll(List.of(e1,e2));
 

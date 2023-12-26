@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
-import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
 import jakarta.transaction.Transactional;
 
@@ -36,33 +35,16 @@ public class ClienteService implements PlantillaServicio<Cliente> {
 	@Override
 	public Cliente buscar(Integer id) {
 
-		Cliente cliente;
+		Cliente cliente = iDao.findById(id).orElseThrow(()->
+		new IllegalStateException("Cliente con id " + id + " no existe"));
 		
-		try {
-			Optional<Cliente> clienteOp = iDao.findById(id);
-			if(clienteOp.isPresent());
-			cliente= clienteOp.get();
-			
-		}catch(Exception e){
-			System.out.println(e.getMessage());			
-			throw new RuntimeException("Error inesperado en el servidor");
-		}
 		return cliente;
 	}
 	
-	public Cliente findByNif(String nif) {
-		Cliente cliente;
-		
-		try {
-			Optional<Cliente> clienteOp  = iDao.findFirstByNif(nif);
-			if(clienteOp.isPresent()) ;
-			cliente = clienteOp.get();
+	public Cliente findByNif(String nif) {		
+		Cliente cliente = iDao.findFirstByNif(nif).orElseThrow(()->
+		new IllegalStateException("Cliente con NIF " + nif + " no encontrado, compruebe o pruebe más tarde"));
 			
-			 
-		}catch(Exception e) {
-			System.out.println(e.getMessage());			
-			throw new RuntimeException("Error inesperado en el servidor");
-		}
 		return cliente;
 	}
 	

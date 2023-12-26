@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -13,9 +14,19 @@ import jakarta.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorResponse> handleException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
-        String message = "Parameter '" + e.getName() + "' must be of type " + e.getRequiredType().getSimpleName();
+    public ResponseEntity<ErrorResponse> handleExceptionMismatch(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
+        String message = "Parametro '" + e.getName() + "' debe ser del tipo " + e.getRequiredType().getSimpleName();
         String error = "Parameter error";
+        LocalDateTime timestamp = LocalDateTime.now();
+        String path = request.getRequestURI();
+        ErrorResponse errorResponse = new ErrorResponse(timestamp, HttpStatus.BAD_REQUEST.value(), error, message, path);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleException(HttpMessageNotReadableException e, HttpServletRequest request) {
+        String message = "Los datos no se han introducido de forma correcta";
+        String error = "Parameters error";
         LocalDateTime timestamp = LocalDateTime.now();
         String path = request.getRequestURI();
         ErrorResponse errorResponse = new ErrorResponse(timestamp, HttpStatus.BAD_REQUEST.value(), error, message, path);

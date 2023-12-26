@@ -69,7 +69,7 @@ public class TransaccionController {
 	@Operation(
 			summary = "Buscar transacciones por mes y año", 
 			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año, envíado en formato json.")
-	@PostMapping(path = "/transaccionesmes/", consumes = "application/json")
+	@PostMapping(path = "/transaccionesmes", consumes = "application/json")
 	public List<Transaccion> getTransaccionesDelMes(@RequestBody FechaMesAnyo fecha){		
 		System.out.println(fecha.getFecha());
 		 return transaccionService.buscarPorMes(fecha.getFecha());
@@ -86,7 +86,7 @@ public class TransaccionController {
 	@Operation(
 			summary = "Devuelve la cantidad total facturada en ese mes", 
 			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año, envíado en formato json.")
-	@PostMapping(path = "/facturadomes/", consumes = "application/json")
+	@PostMapping(path = "/facturadomes", consumes = "application/json")
 	public double getFacturadolMes(@RequestBody FechaMesAnyo fecha){		
 		 return transaccionService.facturadoMes(fecha.getFecha());
 	}
@@ -103,7 +103,7 @@ public class TransaccionController {
 	@Operation(
 			summary = "Buscar transacciones entre un periodo de fechas", 
 			description = "Introducir dos fechas para devolver las transacciones realizadas en ese periodo")
-	@PostMapping(path = "/transaccionesperiodo/", consumes = "application/json")
+	@PostMapping(path = "/transaccionesperiodo", consumes = "application/json")
 	public List<Transaccion> getTransaccionesPeriodo(@RequestBody PeriodoFechaDto periodo){
 		 return transaccionService.buscarPorPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
 	 }	

@@ -32,7 +32,7 @@ public class Demanda implements Serializable {
 	private String localidad;
 	private Integer numHabitaciones;
 	private String tipoVivienda;
-	private boolean activa;
+	private Boolean activa;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_cliente", nullable = false)
@@ -47,7 +47,7 @@ public class Demanda implements Serializable {
 		super();
 	}
 	
-	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente, boolean activa) {
+	public Demanda(String descripcion, String localidad, Integer numHabitaciones, String tipoVivienda ,Cliente cliente, Boolean activa) {
 		super();
 		this.descripcion = descripcion;
 		this.localidad = localidad;
@@ -101,11 +101,11 @@ public class Demanda implements Serializable {
 		this.transacciones = transacciones;
 	}
 		
-	public boolean isActiva() {
+	public Boolean isActiva() {
 		return activa;
 	}
 
-	public void setActiva(boolean activa) {
+	public void setActiva(Boolean activa) {
 		this.activa = activa;
 	}
 
@@ -113,7 +113,7 @@ public class Demanda implements Serializable {
 	public String toString() {
 		return "Demanda [idDemanda=" + idDemanda + ", descripcion=" + descripcion + ", localidad=" + localidad
 				+ ", numHabitaciones=" + numHabitaciones + ", tipoVivienda=" + tipoVivienda + ", activa=" + activa
-				+ ", cliente=" + cliente + ", transacciones=" + transacciones + "]";
+				+ ", cliente=" + cliente + "]";
 	}
 
 	

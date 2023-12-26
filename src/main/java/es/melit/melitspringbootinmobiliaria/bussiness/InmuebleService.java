@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
+import es.melit.melitspringbootinmobiliaria.entities.InmuebleEstadoDto;
 import es.melit.melitspringbootinmobiliaria.iDao.InmuebleDao;
 import jakarta.transaction.Transactional;
 
@@ -16,7 +17,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class InmuebleService implements PlantillaServicio<Inmueble> {
 	
-//	Preguntar si inyectar en atributo o constructor y constructor vacío?
 	public InmuebleDao iDao;	
 	
 	@Autowired
@@ -34,6 +34,15 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		}		
 	}
 	
+	public List<Inmueble> listadoActivos() {		
+		try {
+			return iDao.findAllActivos();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());			
+			throw new RuntimeException("Error inesperado en el servidor");
+		}	
+	}
+	
 	public Inmueble buscar(Integer id) {		
 		Optional<Inmueble> optionalInmueble;
 		try {			
@@ -45,7 +54,8 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 		if(optionalInmueble.isEmpty()) {
 			throw new IllegalStateException("Inmueble buscado no existe");		}
 		return optionalInmueble.get();			
-	}
+	}	
+
 	
 	public List<Inmueble> findByParametros (String localidad, String tipoVivienda, Integer numHabitaciones){
 		
@@ -136,20 +146,22 @@ public class InmuebleService implements PlantillaServicio<Inmueble> {
 	}
 	
 	@Transactional
-	public void actualizarEstado(Inmueble inmuebleActualizado) {
-	   Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getIdInmueble())
-	            .orElseThrow(() -> new IllegalStateException("Inmueble con id " + inmuebleActualizado.getIdInmueble() + " no existe"));
+	public void actualizarEstado(InmuebleEstadoDto inmuebleActualizado) {
+	   Inmueble inmuebleActual = iDao.findById(inmuebleActualizado.getId())
+	            .orElseThrow(() -> new IllegalStateException("Inmueble con id " + inmuebleActualizado.getId() + " no existe"));
 
-	    String comentarioEstado = inmuebleActualizado.getComentarioEstado();
+	    String comentarioEstado = inmuebleActualizado.getComentario();
 	    if (comentarioEstado == null || comentarioEstado.trim().isEmpty()) {
 	        throw new RuntimeException("Debes escribir la razón por la que se cambia el estado del inmueble en comentarios");
 	    }
 
-	    if (inmuebleActualizado.isActivo() != inmuebleActual.isActivo()) {
-	        inmuebleActual.setActivo(inmuebleActualizado.isActivo());
+	    if (inmuebleActualizado.getEstado() ^ inmuebleActual.isActivo()) {
+	        inmuebleActual.setActivo(inmuebleActualizado.getEstado());
 	    }
 	    inmuebleActual.setComentarioEstado(comentarioEstado);
 	}
+
+
 
 	
 }

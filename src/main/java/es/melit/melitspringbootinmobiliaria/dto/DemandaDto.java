@@ -1,7 +1,10 @@
 package es.melit.melitspringbootinmobiliaria.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class DemandaDto {
 	
+	@JsonIgnore
 	private Integer idDemanda;
 	private String descripcion;
 	private Integer idCliente;	

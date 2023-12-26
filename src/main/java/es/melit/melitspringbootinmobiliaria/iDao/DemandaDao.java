@@ -22,6 +22,9 @@ public interface DemandaDao extends JpaRepository<Demanda,Integer>{
 			+ "and (?2 is null or ?2 like concat('%', lower(d.localidad), '%')) "
 			+ "and (?3 is null or ?3 like concat('%', lower(d.tipoVivienda), '%'))")
 	List<Demanda> findByCaracteristicas(Integer numHabitaciones, String localidad, String tipoVivienda);
+	
+	@Query("SELECT d FROM Demanda d WHERE d.activa = TRUE")
+	List<Demanda> findAllActivas();
 
 	@Query("SELECT d FROM Demanda d, Inmueble i " +
 		       "WHERE UPPER(i.localidad) = UPPER(d.localidad) " +

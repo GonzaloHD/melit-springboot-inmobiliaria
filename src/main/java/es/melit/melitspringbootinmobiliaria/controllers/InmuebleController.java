@@ -20,6 +20,7 @@ import es.melit.melitspringbootinmobiliaria.dto.InmuebleDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
+import es.melit.melitspringbootinmobiliaria.entities.InmuebleEstadoDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -46,7 +47,16 @@ public class InmuebleController {
 	public List<Inmueble> getInmuebles(){
 
 		 return inmuebleService.listado();
-	 }	
+	 }		
+	
+	@Operation(
+			   summary = "Listar todos los inmuebles activos", 
+			   description = "Método get para obtener listado completo de inmuebles activos")
+	@GetMapping(path = "/activos")
+	public List<Inmueble> getInmueblesActivos(){
+
+		 return inmuebleService.listadoActivos();
+	 }		
 	
 	@Operation(
 			   summary = "Proporciona información de un inmueble", 
@@ -154,7 +164,7 @@ public class InmuebleController {
 			   description = "Envio de json del estado actual del inmueble: true para activarlo, false para desactivarlo. "
 			   		+ "Son necesarios los parámetris idInmueble, estado y comentario")
 	@PutMapping(consumes = "application/json", path = "/cambiarestado")
-	public void changeEstadoInmueble(@RequestBody Inmueble inmueble) {		
+	public void camiearEstadoInmueble(@RequestBody InmuebleEstadoDto inmueble) {		
 		inmuebleService.actualizarEstado(inmueble);
 	}	
 	

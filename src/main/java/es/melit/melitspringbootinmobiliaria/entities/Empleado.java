@@ -28,6 +28,7 @@ public class Empleado implements Serializable {
 	private String direccion;
 	private String email;
 	private String telefono;
+	private Boolean activo;
 	
 	@OneToMany(mappedBy = "empleado")
 	@JsonIgnore
@@ -40,7 +41,7 @@ public class Empleado implements Serializable {
 	public Empleado() {
 		super();
 	}
-	public Empleado(String nif, String nombre, String apellidos, String direccion, String email, String telefono) {
+	public Empleado(String nif, String nombre, String apellidos, String direccion, String email, String telefono, Boolean activo) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -48,6 +49,7 @@ public class Empleado implements Serializable {
 		this.direccion = direccion;
 		this.email = email;
 		this.telefono = telefono;
+		this.activo = activo;
 	}
 	public Integer getIdEmpleado() {
 		return idEmpleado;
@@ -102,15 +104,19 @@ public class Empleado implements Serializable {
 	}
 	public void setTransacciones(List<Transaccion> transacciones) {
 		this.transacciones = transacciones;
+	}	
+	public Boolean getActivo() {
+		return activo;
+	}
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 	@Override
 	public String toString() {
 		return "Empleado [idEmpleado=" + idEmpleado + ", nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", inmuebles="
-				+ inmuebles + "]";
-	}
-	
-	
+				+ ", direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", activo=" + activo
+				+ "]";
+	}	
 	
 
 }

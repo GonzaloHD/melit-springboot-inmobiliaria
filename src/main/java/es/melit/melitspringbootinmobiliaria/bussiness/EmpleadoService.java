@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.melit.melitspringbootinmobiliaria.entities.Demanda;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoDao;
 import jakarta.transaction.Transactional;
@@ -14,17 +15,26 @@ import jakarta.transaction.Transactional;
 @Service
 public class EmpleadoService implements PlantillaServicio<Empleado> {
 
-	public EmpleadoDao dao;
+	public EmpleadoDao eDao;
 	
 	@Autowired
 	public EmpleadoService(EmpleadoDao dao) {
-		this.dao = dao;
+		this.eDao = dao;
 	}
 	
 	@Override
 	public List<Empleado> listado() {
 		try {
-			return dao.findAll();
+			return eDao.findAll();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());			
+			throw new RuntimeException("Error inesperado en el servidor");
+		}	
+	}
+	
+	public List<Empleado> listadoActivos() {
+		try {
+			return eDao.findAllActivos();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());			
 			throw new RuntimeException("Error inesperado en el servidor");
@@ -36,7 +46,7 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 		Empleado empleado;
 		
 		try {
-			Optional<Empleado> empleadoOp = dao.findById(id);
+			Optional<Empleado> empleadoOp = eDao.findById(id);
 			if(empleadoOp.isPresent()) ;
 			empleado = empleadoOp.get();
 			
@@ -52,7 +62,7 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 		Empleado empleado;
 		
 		try {
-			Optional<Empleado> empleadoOp  = dao.findFirstByNif(nif);
+			Optional<Empleado> empleadoOp  = eDao.findFirstByNif(nif);
 			if(empleadoOp.isPresent()) ;
 			empleado = empleadoOp.get();
 			
@@ -67,14 +77,14 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 	
 	@Override
 	public void guardar(Empleado empleado) {
-		dao.save(empleado);
+		eDao.save(empleado);
 		
 	}
 	
 	@Transactional
 	@Override
 	public void actualizar(Empleado actualizado) {
-		Empleado empleadoActual = dao.findById(actualizado.getIdEmpleado()).orElseThrow(()->
+		Empleado empleadoActual = eDao.findById(actualizado.getIdEmpleado()).orElseThrow(()->
 		new IllegalStateException("Empleao con id " + actualizado.getIdEmpleado() + " no existe"));
 		
 		if(actualizado.getApellidos() != null && actualizado.getApellidos().length()>0 && !Objects.equals(actualizado.getApellidos(), empleadoActual.getApellidos())) {
@@ -95,15 +105,28 @@ public class EmpleadoService implements PlantillaServicio<Empleado> {
 		if(actualizado.getTelefono() != null && actualizado.getTelefono().length()>0 && !Objects.equals(actualizado.getTelefono(), empleadoActual.getTelefono())) {
 			empleadoActual.setTelefono(actualizado.getTelefono());
 		}
+		if(actualizado.getNif() != null && actualizado.getNif().length()>0 && !Objects.equals(actualizado.getNif(), empleadoActual.getNif())) {
+			empleadoActual.setNif(actualizado.getNif());
+		}
+		if(actualizado.getActivo() != null && (actualizado.getActivo()^empleadoActual.getActivo())) {
+			empleadoActual.setActivo(actualizado.getActivo());
+		}
 		
 	}
-
+	
 	@Override
+	@Transactional
 	public void eliminar(Integer id) {
-		if(!dao.existsById(id)) {
+		if(!eDao.existsById(id)) {
 			throw new IllegalStateException("Empleado con id: " + id + " no existe");
 		}
-		dao.deleteById(id);
+		try {
+			Empleado empleado = eDao.findById(id).get();
+			if(empleado.getTransacciones().isEmpty() && empleado.getInmuebles().isEmpty()) eDao.deleteById(id);
+			else empleado.setActivo(false);
+		}catch (Exception e) {
+			throw new RuntimeException("Error inesperado en el servidor");
+		}		
 		
 	}
 	

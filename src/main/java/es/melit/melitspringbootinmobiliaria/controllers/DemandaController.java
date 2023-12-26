@@ -3,6 +3,7 @@ package es.melit.melitspringbootinmobiliaria.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,15 @@ public class DemandaController {
 	public List<Demanda> getDemandas(){
 		 return demandaService.listado();
 	 }	
+	
+	@Operation(
+			summary = "Listar todas las demandas de cliente activas", 
+			description = "Devuelve todas las demandas de clientes que estan marcadas cómo activas")
+	@GetMapping(path = "/activas")
+	public List<Demanda> getDemandasActivas(){
+		 return demandaService.listadoActivas();
+	 }	
+	
 	@Operation(
 			summary = "Busca demanda por id", 
 			description = "Devuelve demanda por id de la demanda")
@@ -109,10 +119,18 @@ public class DemandaController {
 
 	@Operation(
 			summary = "Modificar demanda", 
-			description = "Devuelve todas las transacciones registradas")
+			description = "Modificar una demanda")
 	@PutMapping(consumes = "application/json")
-	public void cambiarDemanda(@RequestBody Demanda demanda) {		
+	public void cambiarDemanda(@RequestBody Demanda demanda) {			
 		demandaService.actualizar(demanda);
+	}
+	
+	@Operation(
+			   summary = "Elimina o inactiva una demanda", 
+			   description = "Borrar una demanda, si ya esta vinculada a una transacción sólo la inactiva")
+	@DeleteMapping("/{id}")
+	public void deleteDemanda(@PathVariable Integer id) {
+		demandaService.eliminar(id);
 	}
 	
 }

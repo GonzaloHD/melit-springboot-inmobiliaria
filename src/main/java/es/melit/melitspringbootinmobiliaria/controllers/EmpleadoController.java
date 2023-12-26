@@ -33,9 +33,18 @@ public class EmpleadoController {
 			   summary = "Listar todos los empleados", 
 			   description = "Método get para obtener listado completo de empleados")
 	@GetMapping
-	public List<Empleado> getClientes(){
+	public List<Empleado> getEmpleados(){
 		 return gestionEmpleados.listado();
 	 }
+	
+	@Operation(
+			   summary = "Listar todos los empleados activos", 
+			   description = "Método get para obtener listado completo de empleados que aparecen como activos")
+	@GetMapping(path = "/activos")
+	public List<Empleado> getEmpleadosActivos(){
+		 return gestionEmpleados.listadoActivos();
+	 }
+	
 	
 	@Operation(
 			   summary = "Proporciona información de un empleado", 
@@ -71,7 +80,8 @@ public class EmpleadoController {
 	
 	@Operation(
 			   summary = "Eliminar un empleado", 
-			   description = "Borra el registro de un empleado a partir de su id enviado en path de url")
+			   description = "Borra el registro de un empleado a partir de su id enviado en path de url,"
+			   		+ " si el empleado esta registrado en alguna transacción o inmuelbe simplemente lo pasa a inactivo")
 	@DeleteMapping("/{id}")
 	public void deleteCliente(@PathVariable Integer id) {
 		gestionEmpleados.eliminar(id);

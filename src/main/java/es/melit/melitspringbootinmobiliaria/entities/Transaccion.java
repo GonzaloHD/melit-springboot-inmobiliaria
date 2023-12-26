@@ -107,8 +107,8 @@ public class Transaccion implements Serializable {
 	@Override
 	public String toString() {
 		return "Transaccion [idTransaccion=" + idTransaccion + ", fecha=" + fecha
-				+ ", comentario=" + comentario + ", precioFinal=" + precioFinal + " , inmueble=" + inmueble + ", demanda=" + demanda + ", empleado="
-				+ empleado + "]";
+				+ ", comentario=" + comentario + ", precioFinal=" + precioFinal + " , inmueble=" + inmueble.getIdInmueble() + ", demanda=" + demanda.getIdDemanda() + ", empleado="
+				+ empleado.getIdEmpleado() + "]";
 	}		
 	
 }

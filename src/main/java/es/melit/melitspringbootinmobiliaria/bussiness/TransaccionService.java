@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
 import es.melit.melitspringbootinmobiliaria.iDao.TransaccionDao;
 import jakarta.transaction.Transactional;
@@ -103,9 +104,12 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 	}
 
 	@Override
-	public void guardar(Transaccion inmueble) {
+	public void guardar(Transaccion transaccion) {
 		try {
-			tDao.save(inmueble);
+			Inmueble inmueble = transaccion.getInmueble();
+			inmueble.setComentarioEstado("Inmueble vendido en transacción: " + transaccion.getIdTransaccion());
+			inmueble.setActivo(false);
+			tDao.save(transaccion);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException("Error inesperado en el servidor");
@@ -124,7 +128,7 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 	@Override
 	public void actualizar(Transaccion actualizado) {
 		Transaccion actual = tDao.findById(actualizado.getIdTransaccion()).orElseThrow(()->
-		new IllegalStateException("Inmueble con id " + actualizado.getIdTransaccion() + " no existe"));
+		new IllegalStateException("Transacción con id " + actualizado.getIdTransaccion() + " no existe"));
 		
 		if(actualizado.getComentario() != null && actualizado.getComentario().length()>0 && !Objects.equals(actualizado.getComentario(), actual.getComentario())) {
 			actual.setComentario(actualizado.getComentario());

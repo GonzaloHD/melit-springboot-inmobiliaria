@@ -158,8 +158,7 @@ public class Inmueble implements Serializable {
 	public String toString() {
 		return "Inmueble [idInmueble=" + idInmueble + ", descripcion=" + descripcion + ", direccion=" + direccion
 				+ ", localidad=" + localidad + ", tipoVivienda=" + tipoVivienda + ", numHabitaciones=" + numHabitaciones
-				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", publicaciones="
-				+ publicaciones + ", transaccion=" + transaccion + ", comentarioEstado=" + comentarioEstado + ", precio=" + precio + " , metrosCuadrados" + metrosCuadrados + " ]";
+				+ ", activo=" + activo + ", cliente=" + cliente + ", empleado=" + empleado + ", transaccion=" + transaccion + ", comentarioEstado=" + comentarioEstado + ", precio=" + precio + " , metrosCuadrados" + metrosCuadrados + " ]";
 	}	
 	
 

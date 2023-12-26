@@ -30,6 +30,15 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 			throw new RuntimeException("Error inesperado en el servidor");
 		}		
 	}
+	
+	
+	public List<Demanda> listadoActivas() {
+		try {
+			return dDao.findAllActivas();
+		}catch (Exception e) {
+			throw new RuntimeException("Error inesperado en el servidor");
+		}		
+	}
 
 	@Override
 	public Demanda buscar(Integer id) {
@@ -80,23 +89,26 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 
 	@Override
 	public void guardar(Demanda demanda) {
-		try {
+		
 			dDao.save(demanda);
-		} catch (Exception e) {
-			throw new RuntimeException("Error inesperado en el servidor");
-		}		
+		
 	}
 
 	@Override
+	@Transactional
 	public void eliminar(Integer id) {
 		if(!dDao.existsById(id)) {
 			throw new IllegalStateException("Demanda con id: " + id + " no existe");
 		}
 		try {
-			dDao.deleteById(id);
+			Demanda demanda = dDao.findById(id).get();
+			System.out.println(demanda.getTransacciones());
+			if(demanda.getTransacciones().isEmpty()) dDao.deleteById(id);
+			else demanda.setActiva(false);
 		}catch (Exception e) {
 			throw new RuntimeException("Error inesperado en el servidor");
-		}
+		}		
+		
 	}
 
 	@Override
@@ -107,7 +119,21 @@ public class DemandaService implements PlantillaServicio<Demanda> {
 		
 		if(actualizado.getDescripcion() != null && actualizado.getDescripcion().length()>0 && !Objects.equals(actualizado.getDescripcion(), actual.getDescripcion())) {
 			actual.setDescripcion(actualizado.getDescripcion());
+		}
+		
+		if(actualizado.isActiva() != null && (actualizado.isActiva()^actual.isActiva())) {
+			actual.setActiva(actualizado.isActiva());
+		}
+		if(actualizado.getLocalidad() != null && actualizado.getLocalidad().length()>0 && !Objects.equals(actualizado.getLocalidad(), actual.getLocalidad())) {
+			actual.setLocalidad(actualizado.getLocalidad());
+		}
+		if(actualizado.getTipoVivienda() != null && actualizado.getTipoVivienda().length()>0 && !Objects.equals(actualizado.getTipoVivienda(), actual.getTipoVivienda())) {
+			actual.setTipoVivienda(actualizado.getTipoVivienda());
 		}		
+		if(actualizado.getNumHabitaciones() != null && actualizado.getNumHabitaciones()!= actual.getNumHabitaciones()) {
+			actual.setNumHabitaciones(actualizado.getNumHabitaciones());
+		}	
+		
 		
 	}
 

@@ -46,7 +46,7 @@ public class PublicacionController {
 	@Operation(
 			summary = "Devuelve todas las publicaciones activas", 
 			description = "Devuelve todas las publicaciones activas que no han sido cerradas")
-	@GetMapping(path = "/activas/")
+	@GetMapping(path = "/activas")
 	public List<Publicacion> getPublicacionesActivas(){
 		 return publicacionService.listadoActivas();
 	 }	

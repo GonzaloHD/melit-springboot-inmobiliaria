@@ -2,6 +2,7 @@ package es.melit.melitspringbootinmobiliaria.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -92,12 +93,26 @@ public class Cliente implements Serializable {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}	
+	@Override
+	public int hashCode() {
+		return Objects.hash(idCliente);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(idCliente, other.idCliente);
 	}
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos
-				+ ", direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", inmuebles="
-				+ inmuebles + ", demandas=" + demandas + "]";
+				+ ", direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + "]";
 	}
 	
 	
