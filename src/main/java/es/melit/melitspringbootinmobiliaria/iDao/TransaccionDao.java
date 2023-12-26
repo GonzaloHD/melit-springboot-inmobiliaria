@@ -1,5 +1,6 @@
 package es.melit.melitspringbootinmobiliaria.iDao;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,9 @@ public interface TransaccionDao extends JpaRepository<Transaccion, Integer>{
 	List<Transaccion> findByEmpleado(Integer IdEmpleado);	
 	
 	@Query("SELECT t FROM Transaccion t WHERE MONTH(t.fecha) = ?1 AND YEAR(t.fecha) = ?2")
-	List<Transaccion> findByMonth(Integer mes, Integer year);	
+	List<Transaccion> findByMonth(Integer mes, Integer year);
+	
+	@Query("SELECT t FROM Transaccion t WHERE t.fecha between ?1 AND ?2")
+	List<Transaccion> findByTimePeriod(Instant fechaInicio, Instant fechaFin);	
 	
 }

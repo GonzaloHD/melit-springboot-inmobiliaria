@@ -1,7 +1,9 @@
 package es.melit.melitspringbootinmobiliaria.bussiness;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -68,17 +70,37 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 		
 	}
 	
-//	public List<Transaccion> buscarPorPeriodo(String fechaInicial, String fechaFinal){
-//        LocalDate fechaInicio = LocalDate.parse(fechaInicial, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-//        LocalDate fechaFin = LocalDate.parse(fechaInicial.ofPattern("dd/MM/yyyy"));
-//
-//        // Extract year, month, and day
-//        int year = date.getYear();
-//        int month = date.getMonthValue();
-//        int day = date.getDayOfMonth();
-//	}
+	public double facturadoMes(String mesAnyo) {
+		double total = 0;
+		for(Transaccion transaccion : buscarPorMes(mesAnyo)) {
+			total += transaccion.getPrecioFinal();
+		}
+		return total;
+	}
 	
+	public List<Transaccion> buscarPorPeriodo(String fechaInicial, String fechaFinal){
+		Instant fechaInicio;
+        Instant fechaFin;
+		
+		try {			
+			fechaInicio = LocalDate.parse(fechaInicial, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay(ZoneId.systemDefault()).toInstant();
+			fechaFin = LocalDate.parse(fechaFinal, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay(ZoneId.systemDefault()).toInstant();
+		} catch (Exception e) {
+			System.out.println(e);
+			throw new IllegalStateException("Formato de fecha introducido no correcto");
+		}
+        
+		return tDao.findByTimePeriod(fechaInicio, fechaFin);
+
+	}	
 	
+	public double facturadoPeriodo(String fechaInicial, String fechaFinal) {
+		double total = 0;
+		for(Transaccion transaccion : buscarPorPeriodo(fechaInicial, fechaFinal)) {
+			total += transaccion.getPrecioFinal();
+		}
+		return total;
+	}
 
 	@Override
 	public void guardar(Transaccion inmueble) {

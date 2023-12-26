@@ -17,6 +17,7 @@ import es.melit.melitspringbootinmobiliaria.bussiness.EmpleadoService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.bussiness.TransaccionService;
 import es.melit.melitspringbootinmobiliaria.dto.FechaMesAnyo;
+import es.melit.melitspringbootinmobiliaria.dto.PeriodoFechaDto;
 import es.melit.melitspringbootinmobiliaria.dto.TransaccionDto;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
@@ -66,9 +67,9 @@ public class TransaccionController {
 	 }
 	
 	@Operation(
-			summary = "Buscar transacciones del mes", 
+			summary = "Buscar transacciones por mes y año", 
 			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año, envíado en formato json.")
-	@PostMapping(path = "/transaccionesdelmes/", consumes = "application/json")
+	@PostMapping(path = "/transaccionesmes/", consumes = "application/json")
 	public List<Transaccion> getTransaccionesDelMes(@RequestBody FechaMesAnyo fecha){		
 		System.out.println(fecha.getFecha());
 		 return transaccionService.buscarPorMes(fecha.getFecha());
@@ -80,7 +81,41 @@ public class TransaccionController {
 	@GetMapping(path = "/transaccionesmesformulario/{mes}/{anyo}")
 	public List<Transaccion> getTransaccionesMesFormulario(@PathVariable("mes") String mes, @PathVariable("anyo") String anyo){
 		 return transaccionService.buscarPorMes(mes + "/" + anyo);
+	}
+	
+	@Operation(
+			summary = "Devuelve la cantidad total facturada en ese mes", 
+			description = "Introducir fecha en formato MM/AAAA para recibir las transacciones de ese mes y año, envíado en formato json.")
+	@PostMapping(path = "/facturadomes/", consumes = "application/json")
+	public double getFacturadolMes(@RequestBody FechaMesAnyo fecha){		
+		 return transaccionService.facturadoMes(fecha.getFecha());
+	}
+	
+	@Operation(
+			summary = "Devuelve la cantidad total facturada en ese mes", 
+			description = "Introducir mes y año para recibir la cantidad total facturada de ese mes")
+	@GetMapping(path = "/facturadomesformulario/{mes}/{anyo}")
+	public double getFacturadoMesFormulario(@PathVariable("mes") String mes, @PathVariable("anyo") String anyo){
+		 return transaccionService.facturadoMes(mes + "/" + anyo);
+	}	
+
+	
+	@Operation(
+			summary = "Buscar transacciones entre un periodo de fechas", 
+			description = "Introducir dos fechas para devolver las transacciones realizadas en ese periodo")
+	@PostMapping(path = "/transaccionesperiodo/", consumes = "application/json")
+	public List<Transaccion> getTransaccionesPeriodo(@RequestBody PeriodoFechaDto periodo){
+		 return transaccionService.buscarPorPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
 	 }	
+	
+	@Operation(
+			summary = "Devuelve la cantidad total facturada en un periodo", 
+			description = "Devuelve la cantidad total facturada en transacción en un periodo")
+	@PostMapping(path = "/facturadoperiodo", consumes = "application/json")
+	public double getFacturadoPeriodo(@RequestBody PeriodoFechaDto periodo){
+		 return transaccionService.facturadoPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
+	}
+	
 	
 	@Operation(
 			summary = "Registrar una transacción por compra y venta de un inmueble", 
