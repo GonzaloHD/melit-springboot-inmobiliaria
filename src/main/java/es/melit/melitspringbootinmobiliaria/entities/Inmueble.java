@@ -153,6 +153,19 @@ public class Inmueble implements Serializable {
 	}
 	public void setMetrosCuadrados(Double metrosCuadrados) {
 		this.metrosCuadrados = metrosCuadrados;
+	}	
+	
+	public List<Publicacion> getPublicaciones() {
+		return publicaciones;
+	}
+	public void setPublicaciones(List<Publicacion> publicaciones) {
+		this.publicaciones = publicaciones;
+	}
+	public Transaccion getTransaccion() {
+		return transaccion;
+	}
+	public void setTransaccion(Transaccion transaccion) {
+		this.transaccion = transaccion;
 	}
 	@Override
 	public String toString() {

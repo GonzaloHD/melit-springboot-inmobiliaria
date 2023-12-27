@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
@@ -82,8 +83,8 @@ public class DemandaController {
 			description = "Devuelve todas las demandas por características, numero habitaciones, localidad y tipo de vivienda."
 					+ " Formato de solicitud en json")
 	@GetMapping(consumes = "application/json", path = "/{localidad}{numHabitaciones}{tipoVivienda}")
-	public List<Demanda> getDemandaCaracteristicasFormulario(@PathVariable("localidad") String localidad,
-			@PathVariable("numHabitaciones") Integer numHabitaciones, @PathVariable("tipoVivienda") String tipoVivienda){		
+	public List<Demanda> getDemandaCaracteristicasFormulario(@PathVariable("localidad") @RequestParam(required = false) String localidad,
+			@PathVariable("numHabitaciones") @RequestParam(required = false) Integer numHabitaciones, @PathVariable("tipoVivienda") @RequestParam(required = false) String tipoVivienda){		
 		return demandaService.buscarPorCaracteristicas(numHabitaciones, localidad, tipoVivienda);		
 	 }
 	

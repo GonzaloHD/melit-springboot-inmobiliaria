@@ -18,6 +18,7 @@ import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
 import es.melit.melitspringbootinmobiliaria.bussiness.EmpleadoService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.dto.InmuebleDto;
+import es.melit.melitspringbootinmobiliaria.dto.InmuebleUpdateDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
@@ -159,6 +160,14 @@ public class InmuebleController {
 	@PutMapping(consumes = "application/json")
 	public void changeInmueble(@RequestBody Inmueble inmueble) {		
 		inmuebleService.actualizar(inmueble);
+	}	
+	
+	@Operation(
+			   summary = "Modificar un inmueble con Id en URL", 
+			   description = "Envío de json con el id del inmueble y los parámetros que se desean modificar")
+	@PutMapping(consumes = "application/json", path = "/{idInmueble}")
+	public void updateInmueble(@RequestBody InmuebleUpdateDto inmueble, @PathVariable Integer idInmueble) {		
+		inmuebleService.actualizarConId(inmueble, idInmueble);
 	}	
 	
 	@Operation(

@@ -14,13 +14,10 @@ public interface InmuebleDao extends JpaRepository <Inmueble, Integer>{
 //	@Query("SELECT i FROM Inmueble i WHERE UPPER(i.localidad) = UPPER(:localidad) AND UPPER(i.tipoVivienda) = UPPER(:tipoVivienda) AND i.numHabitaciones = :numHabitaciones")
 //	List<Inmueble> findByParametros(String localidad, String tipoVivienda,Integer numHabitaciones);
 	
-	@Query("SELECT i FROM Inmueble i WHERE " +
-		       "(:localidad IS NULL OR UPPER(i.localidad) = UPPER(:localidad)) AND " +
-		       "(:tipoVivienda IS NULL OR UPPER(i.tipoVivienda)= UPPER(:tipoVivienda)) AND " +
-		       "(:numHabitaciones IS NULL OR i.numHabitaciones  = :numHabitaciones)")
-	List<Inmueble> findByParametros(@Param("localidad") String localidad,
-		                                @Param("tipoVivienda") String tipoVivienda,
-		                                @Param("numHabitaciones") Integer numHabitaciones);	
+	@Query("select i from Inmueble i where (?1 is null or i.numHabitaciones = ?1) "
+			+ "and (?2 is null or ?2 like concat('%', lower(i.localidad), '%')) "
+			+ "and (?3 is null or ?3 like concat('%', lower(i.tipoVivienda), '%'))")
+	List<Inmueble> findByParametros(@Param("numHabitaciones") Integer numHabitaciones, @Param("localidad") String localidad, @Param("tipoVivienda") String tipoVivienda);	
 
 	@Query("SELECT i FROM Inmueble i " +
 		   "JOIN Demanda d ON i.localidad = d.localidad AND i.tipoVivienda = d.tipoVivienda AND i.numHabitaciones = d.numHabitaciones " +
