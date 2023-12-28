@@ -1,4 +1,4 @@
-package es.melit.melitspringbootinmobiliaria.iDao;
+package es.melit.melitspringbootinmobiliaria.Dao;
 
 import java.time.Instant;
 import java.util.List;

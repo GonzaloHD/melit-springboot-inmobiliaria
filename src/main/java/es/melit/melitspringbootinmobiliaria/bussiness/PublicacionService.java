@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.melit.melitspringbootinmobiliaria.Dao.PublicacionDao;
 import es.melit.melitspringbootinmobiliaria.entities.Publicacion;
-import es.melit.melitspringbootinmobiliaria.iDao.PublicacionDao;
 import jakarta.transaction.Transactional;
 
 @Service

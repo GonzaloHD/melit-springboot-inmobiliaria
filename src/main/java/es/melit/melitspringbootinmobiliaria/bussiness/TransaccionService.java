@@ -11,9 +11,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import es.melit.melitspringbootinmobiliaria.Dao.TransaccionDao;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
-import es.melit.melitspringbootinmobiliaria.iDao.TransaccionDao;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -104,12 +104,14 @@ public class TransaccionService implements PlantillaServicio<Transaccion> {
 	}
 
 	@Override
+	@Transactional
 	public void guardar(Transaccion transaccion) {
 		try {
 			Inmueble inmueble = transaccion.getInmueble();
-			inmueble.setComentarioEstado("Inmueble vendido en transacción: " + transaccion.getIdTransaccion());
+			inmueble.setComentarioEstado("Inmueble vendido en transacción");
 			inmueble.setActivo(false);
 			tDao.save(transaccion);
+			inmueble.setComentarioEstado("Inmueble vendido en transacción: " + transaccion.getIdTransaccion());
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException("Error inesperado en el servidor");

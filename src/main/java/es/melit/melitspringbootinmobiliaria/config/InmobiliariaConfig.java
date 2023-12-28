@@ -7,18 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import es.melit.melitspringbootinmobiliaria.Dao.ClienteDao;
+import es.melit.melitspringbootinmobiliaria.Dao.DemandaDao;
+import es.melit.melitspringbootinmobiliaria.Dao.EmpleadoDao;
+import es.melit.melitspringbootinmobiliaria.Dao.InmuebleDao;
+import es.melit.melitspringbootinmobiliaria.Dao.PublicacionDao;
+import es.melit.melitspringbootinmobiliaria.Dao.TransaccionDao;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Demanda;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
 import es.melit.melitspringbootinmobiliaria.entities.Publicacion;
 import es.melit.melitspringbootinmobiliaria.entities.Transaccion;
-import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
-import es.melit.melitspringbootinmobiliaria.iDao.DemandaDao;
-import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoDao;
-import es.melit.melitspringbootinmobiliaria.iDao.InmuebleDao;
-import es.melit.melitspringbootinmobiliaria.iDao.PublicacionDao;
-import es.melit.melitspringbootinmobiliaria.iDao.TransaccionDao;
 
 
 @Configuration
@@ -51,9 +51,14 @@ public class InmobiliariaConfig {
 			Inmueble i3 = new Inmueble("Duplex 2 plantas", "Calle Fenix,12 04720", "Almeria", "Duplex", 2, true, c5, e2, 145500.0, 79.00);
 			Inmueble i4 = new Inmueble("Segundo con ascensor", "Calle de Nicaragua, 14 08013", "Barcelona", "Piso", 2, true, c4, e3, 280000.0, 67.00);	
 			Inmueble i5 = new Inmueble("Tercero con ascensor", "Calle Parador del sol 12, 28037", "Madrid", "Piso", 1, true, c5, e1, 230000.0, 150.00);
-			Inmueble i6 = new Inmueble("Duplex 2 plantas", "Calle de la Higueras, 4 04727", "Almeria", "Piso", 3, false, c2, e2, 135000.0, 80.00);	
+			Inmueble i6 = new Inmueble("Duplex 2 plantas", "Calle de la Higueras, 4 04727", "Almeria", "Piso", 3, true, c2, e2, 135000.0, 80.00);
+			Inmueble i7 = new Inmueble("Tercero sin ascensor", "Calle de Fermin, 10 28074", "Madrid", "Piso", 2, true, c4, e1, 210000.0, 80.6);
+			Inmueble i8 = new Inmueble("Duplx adosado 3 plantas", "Calle Santa Eulalia, 14 04732", "Almeria", "Dupex", 3, true, c5, e2, 158000.0, 98.00);
+			Inmueble i9 = new Inmueble("Duplex 2 plantas", "Calle Enix,17 04720", "Almeria", "Duplex", 2, true, c5, e2, 143500.0, 79.00);
+			Inmueble i10 = new Inmueble("Segundo con ascensor", "Calle de Nicaragua, 14 08013", "Barcelona", "Piso", 2, true, c4, e3, 277000.0, 67.00);	
+			Inmueble i11 = new Inmueble("Tercero con ascensor", "Calle Angosta 19, 28039", "Madrid", "Piso", 2, true, c5, e1, 231000.0, 150.00);
 			
-			iDao.saveAll(List.of(i1,i2,i3,i4,i5,i6));			
+			iDao.saveAll(List.of(i1,i2,i3,i4,i5,i6, i7, i8, i9, i10, i11));			
 			
 			Demanda d1 = new Demanda("Piso centrico con ascensor", "Madrid", 2, "Piso", c1, true);
 			Demanda d2 = new Demanda("Casa de pueblo", "Almeria", 2, "Duplex", c2, true);

@@ -3,6 +3,7 @@ package es.melit.melitspringbootinmobiliaria.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @Tag(name = "Transacciones de compra-venta", description = "Operaciones sobre transacciones. CRUD y busqueda de transacciones")
 @RequestMapping(path = "/transacciones")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransaccionController {	
 	
 	private TransaccionService transaccionService;
@@ -99,22 +101,22 @@ public class TransaccionController {
 		 return transaccionService.facturadoMes(mes + "/" + anyo);
 	}	
 
+	//Check it out:
+//	@Operation(
+//			summary = "Buscar transacciones entre un periodo de fechas", 
+//			description = "Introducir dos fechas para devolver las transacciones realizadas en ese periodo")
+//	@PostMapping(path = "/transaccionesperiodo", consumes = "application/json")
+//	public List<Transaccion> getTransaccionesPeriodo(@RequestBody PeriodoFechaDto periodo){
+//		 return transaccionService.buscarPorPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
+//	 }	
 	
-	@Operation(
-			summary = "Buscar transacciones entre un periodo de fechas", 
-			description = "Introducir dos fechas para devolver las transacciones realizadas en ese periodo")
-	@PostMapping(path = "/transaccionesperiodo", consumes = "application/json")
-	public List<Transaccion> getTransaccionesPeriodo(@RequestBody PeriodoFechaDto periodo){
-		 return transaccionService.buscarPorPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
-	 }	
-	
-	@Operation(
-			summary = "Devuelve la cantidad total facturada en un periodo", 
-			description = "Devuelve la cantidad total facturada en transacción en un periodo")
-	@PostMapping(path = "/facturadoperiodo", consumes = "application/json")
-	public double getFacturadoPeriodo(@RequestBody PeriodoFechaDto periodo){
-		 return transaccionService.facturadoPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
-	}
+//	@Operation(
+//			summary = "Devuelve la cantidad total facturada en un periodo", 
+//			description = "Devuelve la cantidad total facturada en transacción en un periodo")
+//	@PostMapping(path = "/facturadoperiodo", consumes = "application/json")
+//	public double getFacturadoPeriodo(@RequestBody PeriodoFechaDto periodo){
+//		 return transaccionService.facturadoPeriodo(periodo.getFechaInicio(), periodo.getFechaFin());
+//	}
 	
 	
 	@Operation(

@@ -8,12 +8,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.melit.melitspringbootinmobiliaria.Dao.ClienteDao;
+import es.melit.melitspringbootinmobiliaria.Dao.EmpleadoDao;
+import es.melit.melitspringbootinmobiliaria.Dao.InmuebleDao;
+import es.melit.melitspringbootinmobiliaria.dto.InmuebleEstadoDto;
 import es.melit.melitspringbootinmobiliaria.dto.InmuebleUpdateDto;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
-import es.melit.melitspringbootinmobiliaria.entities.InmuebleEstadoDto;
-import es.melit.melitspringbootinmobiliaria.iDao.ClienteDao;
-import es.melit.melitspringbootinmobiliaria.iDao.EmpleadoDao;
-import es.melit.melitspringbootinmobiliaria.iDao.InmuebleDao;
 import jakarta.transaction.Transactional;
 
 

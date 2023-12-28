@@ -18,11 +18,11 @@ import es.melit.melitspringbootinmobiliaria.bussiness.ClienteService;
 import es.melit.melitspringbootinmobiliaria.bussiness.EmpleadoService;
 import es.melit.melitspringbootinmobiliaria.bussiness.InmuebleService;
 import es.melit.melitspringbootinmobiliaria.dto.InmuebleDto;
+import es.melit.melitspringbootinmobiliaria.dto.InmuebleEstadoDto;
 import es.melit.melitspringbootinmobiliaria.dto.InmuebleUpdateDto;
 import es.melit.melitspringbootinmobiliaria.entities.Cliente;
 import es.melit.melitspringbootinmobiliaria.entities.Empleado;
 import es.melit.melitspringbootinmobiliaria.entities.Inmueble;
-import es.melit.melitspringbootinmobiliaria.entities.InmuebleEstadoDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 

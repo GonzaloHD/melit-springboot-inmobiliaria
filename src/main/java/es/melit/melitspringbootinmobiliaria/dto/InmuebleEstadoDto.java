@@ -1,4 +1,4 @@
-package es.melit.melitspringbootinmobiliaria.entities;
+package es.melit.melitspringbootinmobiliaria.dto;
 
 public class InmuebleEstadoDto {
 	

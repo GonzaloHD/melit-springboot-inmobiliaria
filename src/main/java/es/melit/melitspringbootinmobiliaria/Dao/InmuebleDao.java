@@ -1,4 +1,4 @@
-package es.melit.melitspringbootinmobiliaria.iDao;
+package es.melit.melitspringbootinmobiliaria.Dao;
 
 import java.util.List;
 
@@ -37,12 +37,12 @@ public interface InmuebleDao extends JpaRepository <Inmueble, Integer>{
 //	+ "AND i.numHabitaciones = d.numHabitaciones AND i.localidad = d.localidad "
 //	+ "AND i.tipoVivienda = d.tipoVivienda)")
 	
-	@Query("SELECT i FROM Inmueble i WHERE (i.numHabitaciones, i.localidad, i.tipoVivienda) "
-			+ "IN (SELECT d.numHabitaciones, d.localidad, d.tipoVivienda FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1)")
+	@Query("SELECT i FROM Inmueble i WHERE (i.numHabitaciones, i.localidad, i.tipoVivienda, i.activo) "
+			+ "IN (SELECT d.numHabitaciones, d.localidad, d.tipoVivienda, true FROM Demanda d JOIN d.cliente c WHERE c.idCliente = ?1 and d.activa = true)")
 	List<Inmueble> findDemandadosCliente(Integer idCliente);
 	
 	@Query("SELECT i FROM Inmueble i, Demanda d " +
-		       "WHERE i.localidad = d.localidad AND i.tipoVivienda = d.tipoVivienda AND i.numHabitaciones = d.numHabitaciones")
+		       "WHERE i.localidad = d.localidad AND i.tipoVivienda = d.tipoVivienda AND i.numHabitaciones = d.numHabitaciones AND i.activo = TRUE and d. activa = true")
 	List<Inmueble> findInmueblesWithMatchingDemandas();
 	
 	@Query("SELECT i FROM Inmueble i WHERE i.activo = TRUE")
